@@ -16,6 +16,15 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+//enable cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: myAllowSpecificOrigins, builder =>
+    {
+        builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,14 +36,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//enable cors
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: myAllowSpecificOrigins, builder =>
-    {
-        builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
-    });
-});
+app.UseCors(myAllowSpecificOrigins);
 
 app.UseAuthorization();
 
