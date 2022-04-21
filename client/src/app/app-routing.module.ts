@@ -1,3 +1,4 @@
+import { TableUsersComponent } from './Users/table-users/table-users.component';
 import { ListProductsComponent } from './list-products/list-products.component';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { CartComponent } from './cart/cart.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'single-item', component: SingleProductComponent },
   { path: 'products', component: ListProductsComponent },
+  { path: 'users', component: TableUsersComponent },
 
 
   { path: 'table-products', component: TableProductsComponent },
