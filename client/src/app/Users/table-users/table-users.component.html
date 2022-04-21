@@ -1,13 +1,13 @@
 <section class="py-5">
     <div class="container px-4">
         <h2>Table Users</h2>
+        <button class="btn btn-primary mb-3" (click)="open(mymodal)">Add New User</button>
       <div class="row"> 
         <table 
         mat-table   
         [dataSource]="dataSource" 
         class="mat-elevation-z8">
-        
-        
+
           <!-- Name Column -->
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef > Email </th>
@@ -31,6 +31,15 @@
             <th mat-header-cell *matHeaderCellDef> Role </th>
             <td mat-cell *matCellDef="let element"> {{element.roleName.roleName}} </td>
           </ng-container>
+           <!-- Action -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef >  </th>
+            <td mat-cell *matCellDef="let element"> 
+              <button class="border-0 bg-white m-lg-1" (click)="updateUser(element.id, element)"><mat-icon>edit</mat-icon></button>
+              <button class="border-0 bg-white" (click)="deleteUser(element.id)" ><mat-icon>delete</mat-icon></button>
+            </td>
+          </ng-container>
+
   
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -43,8 +52,71 @@
           </mat-paginator>
       </div>
   </section>
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">User Details</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <p>Fill in the data below</p>
+                        <form class="requires-validation" novalidate>
+                            <div class="col-md-12">
+                                <input class="form-control" type="email" name="email" placeholder="E-mail" [(ngModel)] = "user.email" required>
+                                 <div class="valid-feedback">Email field is valid!</div>
+                                 <div class="invalid-feedback">Email field cannot be blank!</div>
+                            </div>
+                            <div class="col-md-12">
+                              <input class="form-control" type="password" name="password" placeholder="Password" [(ngModel)] = "user.password" required>
+                               <div class="valid-feedback">Password field is valid!</div>
+                               <div class="invalid-feedback">Password field cannot be blank!</div>
+                           </div>
 
-  
+                            <div class="col-md-12">
+                              <input class="form-control" type="text" name="username" placeholder="UserName" [(ngModel)] = "user.username" required>
+                              <div class="valid-feedback">Username field is valid!</div>
+                              <div class="invalid-feedback">Username field cannot be blank!</div>
+                           </div>
+
+                           <div class="col-md-12">
+                                <select class="form-select mt-3" name="role" (change)= "ChangeRole($event.target)"  [(ngModel)] = "user.roleId" required>
+                                      <option selected disabled value="0">Roles</option>
+                                      <option  *ngFor="let role of roles" [value]="role.id">{{role.roleName}}</option>
+                               </select>
+                                <div class="valid-feedback">You selected a position!</div>
+                                <div class="invalid-feedback">Please select a position!</div>
+                           </div>
+
+
+                           <div class="col-md-12">
+                            <input class="form-control" type="text" name="telephone" [(ngModel)] = "user.telephone" placeholder=" Phone Number" required>
+                            <div class="valid-feedback">Phone number field is valid!</div>
+                            <div class="invalid-feedback">Phone number field cannot be blank!</div>
+                         </div>
+
+                           <div class="col-md-12">
+                            <input class="form-control" type="text" name="address" [(ngModel)] = "user.address" placeholder="Address" required>
+                            <div class="valid-feedback">Address field is valid!</div>
+                            <div class="invalid-feedback">Address field cannot be blank!</div>
+                         </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Save</button>
+      <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </ng-template>
   
   
   

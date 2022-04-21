@@ -4,6 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import {MatTableModule} from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -46,7 +49,10 @@ import { TableUsersComponent } from './Users/table-users/table-users.component';
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    FormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

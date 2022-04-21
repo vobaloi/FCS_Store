@@ -27,11 +27,11 @@ export class DataService {
   }
 
   public updateUser ( id: number | string, data: any) {
-    return this.http.put(this.apiUrl + `Users/${id}`, data)
+    return this.http.put(this.apiUrl + `/Users/${id}`, data)
   }
 
    public deleteUser ( id: number | string) {
-     return this.http.delete(this.apiUrl + `Users/${id}`)
+     return this.http.delete(this.apiUrl + `/Users/${id}`)
    }
 
 

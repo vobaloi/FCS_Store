@@ -79,10 +79,23 @@ namespace FCSAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            var newuser = _context.Users.Where(x => x.Email.Equals(user.Email) || x.Telephone.Equals(user.Telephone)).FirstOrDefault();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            if (newuser == null)
+            {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            }
+            else
+                return BadRequest();
+
+            
+
+            
         }
 
         // DELETE: api/Users/5
@@ -100,6 +113,27 @@ namespace FCSAPI.Controllers
 
             return NoContent();
         }
+
+        // POST: api/Users
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("Login")]
+        public async Task<ActionResult<User>> Login(User user)
+        {
+
+            var userLogin = _context.Users.Where(x => x.Email.Equals(user.Email)).FirstOrDefault();
+
+            bool isvalidPassword = BCrypt.Net.BCrypt.Verify(user.Password, userLogin.Password);
+           
+
+            if (isvalidPassword)
+            {
+                return userLogin;
+             }
+            return null;
+
+        }
+
+
 
         private bool UserExists(int id)
         {
