@@ -7,6 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
+import {DividerModule} from 'primeng/divider';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ToastModule} from 'primeng/toast';
+
 
 
 
@@ -18,7 +26,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { TableProductsComponent } from './Products/table-products/table-products.component';
-import { AddProductComponent } from './Products/add-product/add-product.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -26,6 +33,7 @@ import { CartComponent } from './cart/cart.component';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { ListProductsComponent } from './list-products/list-products.component';
 import { TableUsersComponent } from './Users/table-users/table-users.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -34,14 +42,15 @@ import { TableUsersComponent } from './Users/table-users/table-users.component';
     LoginComponent,
     RegisterComponent,
     TableProductsComponent,
-    AddProductComponent,
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
     CartComponent,
     SingleProductComponent,
     ListProductsComponent,
-    TableUsersComponent
+    TableUsersComponent,
+    CategoriesComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -52,7 +61,14 @@ import { TableUsersComponent } from './Users/table-users/table-users.component';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    DialogModule,
+    ButtonModule,
+    DividerModule,
+    ConfirmDialogModule,
+    ToastModule,
+    MessagesModule,
+    MessageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

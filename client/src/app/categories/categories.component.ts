@@ -1,14 +1,9 @@
-import { DataService } from './../../Services/data.service';
+import { DataService } from '../Services/data.service';
 import { OnInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
-
 import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
-
-
-
-
 
 
 export interface User {
@@ -25,15 +20,13 @@ export interface Role {
   roleName: string;
 }
 
-
-
 @Component({
-  selector: 'app-table-users',
-  templateUrl: './table-users.component.html',
-  styleUrls: ['./table-users.component.scss'],
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.scss'],
   providers: [ConfirmationService,MessageService]
 })
-export class TableUsersComponent implements OnInit {
+export class CategoriesComponent implements OnInit {
   @ViewChild(MatPaginator , {static: true}) paginator: MatPaginator ;
 
   displayModal: boolean = false;
@@ -161,5 +154,5 @@ export class TableUsersComponent implements OnInit {
   this.displayModal= false
   }
 
-}
 
+}
