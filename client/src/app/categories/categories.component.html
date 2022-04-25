@@ -1,6 +1,6 @@
 <section class="py-5">
     <div class="container px-4">
-        <h2>Table Users</h2>
+        <h2>Table Categories</h2>
         <p-button (click)="showModalDialog()" icon="pi pi-plus-circle" label="Add New"></p-button>
       <div class="row"> 
         <table 
@@ -9,34 +9,22 @@
         class="mat-elevation-z8 mt-1">
 
           <!-- Name Column -->
-          <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef > Email </th>
-            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          <ng-container matColumnDef="categoryName">
+            <th mat-header-cell *matHeaderCellDef > Category Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
           </ng-container>
         
           <!-- Weight Column -->
-          <ng-container matColumnDef="username">
-            <th mat-header-cell *matHeaderCellDef> UserName </th>
-            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+          <ng-container matColumnDef="categoryDescription">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.categoryDescription}} </td>
           </ng-container>
         
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef> Address </th>
-            <td mat-cell *matCellDef="let element"> {{element.address}} </td>
-          </ng-container>
-
-           <!-- Symbol Column -->
-          <ng-container matColumnDef="roleName">
-            <th mat-header-cell *matHeaderCellDef> Role </th>
-            <td mat-cell *matCellDef="let element"> {{element.roleName.roleName}} </td>
-          </ng-container>
-           <!-- Action -->
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef >  </th>
             <td mat-cell *matCellDef="let element"> 
               <button class="border-0 bg-white m-lg-1" (click)="showUpdateForm(element.id, element)"><mat-icon>edit</mat-icon></button>
-              <button class="border-0 bg-white" (click)="confirmDelete(element.id, element.userName)"><mat-icon>delete</mat-icon></button>
+              <button class="border-0 bg-white" (click)="confirmDelete(element.id, element.categoryName)"><mat-icon>delete</mat-icon></button>
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -63,43 +51,15 @@
                     <p>Fill in the data below</p>
                     <form class="requires-validation" novalidate>
                         <div class="col-md-12">
-                            <input class="form-control" type="email" name="email" placeholder="E-mail" [(ngModel)] = "user.email" required>
+                            <input class="form-control" type="text" name="categoryName" placeholder="Category Name" [(ngModel)] = "category.categoryName" required>
                              <div class="valid-feedback">Email field is valid!</div>
                              <div class="invalid-feedback">Email field cannot be blank!</div>
                         </div>
                         <div class="col-md-12">
-                          <input class="form-control" type="password" name="password" placeholder="Password" [(ngModel)] = "user.password" required>
+                          <input class="form-control" type="text" name="categoryDescription" placeholder="Category Description" [(ngModel)] = "category.categoryDescription" required>
                            <div class="valid-feedback">Password field is valid!</div>
                            <div class="invalid-feedback">Password field cannot be blank!</div>
                        </div>
-
-                        <div class="col-md-12">
-                          <input class="form-control" type="text" name="username" placeholder="UserName" [(ngModel)] = "user.userName" required>
-                          <div class="valid-feedback">Username field is valid!</div>
-                          <div class="invalid-feedback">Username field cannot be blank!</div>
-                       </div>
-
-                       <div class="col-md-12">
-                            <select class="form-select mt-3" name="role" (change)= "ChangeRole($event.target)"  [(ngModel)] = "user.roleId" required>
-                                  <option selected disabled value="0">Roles</option>
-                                  <option  *ngFor="let role of roles" [value]="role.id">{{role.roleName}}</option>
-                           </select>
-                            <div class="valid-feedback">You selected a position!</div>
-                            <div class="invalid-feedback">Please select a position!</div>
-                       </div>
-
-
-                       <div class="col-md-12">
-                        <input class="form-control" type="text" name="telephone" [(ngModel)] = "user.telephone" placeholder=" Phone Number" required>
-                        <div class="valid-feedback">Phone number field is valid!</div>
-                        <div class="invalid-feedback">Phone number field cannot be blank!</div>
-                     </div>
-
-                       <div class="col-md-12">
-                        <input class="form-control" type="text" name="address" [(ngModel)] = "user.address" placeholder="Address" required>
-                        <div class="valid-feedback">Address field is valid!</div>
-                        <div class="invalid-feedback">Address field cannot be blank!</div>
-                     </div>
                     </form>
                 </div>
             </div>
@@ -108,7 +68,7 @@
     </div>
       <ng-template pTemplate="footer">
         <p-divider></p-divider>
-        <button pButton pRipple (click)="SaveUser()" type="button" label="Submit" class="p-button-success"></button>
+        <button pButton pRipple (click)="saveCategory()" type="button" label="Submit" class="p-button-success"></button>
         <button pButton pRipple (click)="ResetForm()"  type="button" label="Cancel" class="p-button-danger"></button>
       </ng-template>
 </p-dialog>

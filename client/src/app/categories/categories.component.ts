@@ -6,18 +6,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
 
 
-export interface User {
-  id: number 
-  email: string;
-  password: string
-  userName: string;
-  address: string;
-  roleId: number;
-  telephone: string
-}
-export interface Role {
+
+export interface Category {
   id: number
-  roleName: string;
+  categoryName: string;
+  categoryDescription: string;
 }
 
 @Component({
@@ -31,93 +24,75 @@ export class CategoriesComponent implements OnInit {
 
   displayModal: boolean = false;
 
-  public roles: Role[] = []
-  public ELEMENT_DATA: User[] = []
+  public roles: Category[] = []
+  public ELEMENT_DATA: Category[] = []
 
-  displayedColumns: string[] = ['email', 'username', 'address', 'roleName', 'action'];
-  dataSource = new MatTableDataSource<User>(this.ELEMENT_DATA);
+  displayedColumns: string[] = ['categoryName', 'categoryDescription', 'action'];
+  dataSource = new MatTableDataSource<Category>(this.ELEMENT_DATA);
 
-  public selectedRole: any = {
-    id:0, roleName: ""
-  }
 
-  private newUser : User = {
+  private newCate : Category ={
     id: 0,
-    email: '',
-    userName: '',
-    password: '',
-    address: '',
-    roleId:0,
-    telephone:''
+    categoryName:'',
+    categoryDescription:'',
   }
 
-  private newRole : Role ={
-    id: 0,
-    roleName:''
-  }
-
-  public user: User = Object.assign({}, this.newUser)
-  public role: Role = Object.assign({}, this.newRole)
-
- 
-
-
-
+  public category: Category = Object.assign({}, this.newCate)
 
   constructor(private DataServices: DataService , private confirmationService: ConfirmationService, private messageService: MessageService) {
 
    }
 
   ngOnInit() {
-    this.loadUser()
-    this.DataServices.getRoleList().subscribe((data) => {
-       this.roles = data;
-       console.log("roles: ",this.roles)
+    this.loadCategory()
+    // this.DataServices.getCategoryList().subscribe((data) => {
+    //    this.roles = data;
+    //    console.log("roles: ",this.roles)
        
-    })
+    // })
     this.dataSource.paginator = this.paginator;
   }
 
-  public loadUser () {
-    this.DataServices.getUserList().subscribe((data) => {
-      this.dataSource.data = data as User[]
-      console.log("user",data)
+  public loadCategory () {
+    this.DataServices.getCategoryList().subscribe((data) => {
+      this.dataSource.data = data as Category[]
+      console.log("category: ",data)
     })
   }
   
 
-  public SaveUser () :void {
-    if ( this.user.id !== 0) {
+  public saveCategory () :void {
+    if ( this.category.id !== 0) {
     console.log("update")
-    this.DataServices.updateUser(this.user.id, this.user).subscribe((data)=> {
+    this.DataServices.updateCategory(this.category.id, this.category).subscribe((data)=> {
       console.log('return-data update: ',data)
-      this.loadUser()
+      this.loadCategory()
       })
     this.ResetForm()
     }
     else {
       console.log("add")
-      this.DataServices.addUser(this.user).subscribe((data)=> {
+      this.DataServices.addCategory(this.category).subscribe((data)=> {
       console.log('return-data add new: ',data)
-      this.loadUser()
+      this.loadCategory()
     })
     this.ResetForm()
     }
   }
 
-  public ChangeRole(event: any) : void {
-    this.user.roleId= parseInt(event.value) 
-  }
+  // public ChangeRole(event: any) : void {
+  //   this.category.roleId= parseInt(event.value) 
+  // }
 
 
-  public showUpdateForm ( id: number, user : User) : void {
-    this.user = user
+  public showUpdateForm ( id: number, category : Category) : void {
+    this.category = category
     this.showModalDialog()
   }
 
-  public deleteUser (id: number): void {
+  public deleteCategory (id: number): void {
     this.DataServices.deleteUser(id).subscribe((data)=> {
-      this.loadUser()
+      this.loadCategory()
     })
     
   }
@@ -133,7 +108,7 @@ export class CategoriesComponent implements OnInit {
         header: 'Warning',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-            this.deleteUser(id);
+            this.deleteCategory(id);
             this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have accepted'});
         },
         reject: (type: any) => {
@@ -150,7 +125,7 @@ export class CategoriesComponent implements OnInit {
 }
 
   public ResetForm () {
-  this.user = this.newUser
+  this.category = this.newCate
   this.displayModal= false
   }
 
