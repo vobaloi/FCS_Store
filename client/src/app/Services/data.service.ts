@@ -45,11 +45,11 @@ export class DataService {
   }
 
   public updateRole ( id: number | string, data: any) {
-    return this.http.put(this.apiUrl + `Roles/${id}`, data)
+    return this.http.put(this.apiUrl + `/Roles/${id}`, data)
   }
 
    public deleteRoles ( id: number | string) {
-     return this.http.delete(this.apiUrl + `Roles/${id}`)
+     return this.http.delete(this.apiUrl + `/Roles/${id}`)
    }
    //Categories
    public getCategoryList(): Observable<any[]> {
@@ -61,11 +61,11 @@ export class DataService {
   }
 
   public updateCategory ( id: number | string, data: any) {
-    return this.http.put(this.apiUrl + `Categories/${id}`, data)
+    return this.http.put(this.apiUrl + `/Categories/${id}`, data)
   }
 
    public deleteCategory ( id: number | string) {
-     return this.http.delete(this.apiUrl + `Categories/${id}`)
+     return this.http.delete(this.apiUrl + `/Categories/${id}`)
    }
    
 }

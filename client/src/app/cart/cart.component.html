@@ -13,7 +13,7 @@
               <th scope="col" class="border-0 bg-light">
                 <div class="py-2 text-uppercase">Price</div>
               </th>
-              <th scope="col" class="border-0 bg-light">
+              <th scope="col" class="border-0 bg-light quantity">
                 <div class="py-2 text-uppercase">Quantity</div>
               </th>
               <th scope="col" class="border-0 bg-light">
@@ -32,8 +32,14 @@
                   </div>
                 </div></th>
                 <td class="align-middle"><strong>$79.00</strong></td>
-                <td class="align-middle"><strong>3</strong></td>
-                <td class="align-middle"><a href="#" class="text-dark"><i class="bi bi-trash"></i></a>
+                <td class="align-middle">
+                  <div class="inputnumber">
+                  <p-inputNumber [(ngModel)]="value19" [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal" inputId="horizontal"
+                  decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                  </p-inputNumber>
+                </div>
+                </td>
+                <td class="align-middle"><a href="#" class="text-dark"><i class="pi pi-trash"></i></a>
                 </td>
             </tr>
 

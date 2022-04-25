@@ -14,6 +14,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 
 
@@ -68,7 +69,8 @@ import { CategoriesComponent } from './categories/categories.component';
     ConfirmDialogModule,
     ToastModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    InputNumberModule
   ],
   providers: [],
   bootstrap: [AppComponent]

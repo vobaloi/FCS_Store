@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
+  value19: number = 3;
   constructor() { }
 
   ngOnInit(): void {

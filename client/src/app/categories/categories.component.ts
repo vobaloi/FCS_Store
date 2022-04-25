@@ -24,7 +24,7 @@ export class CategoriesComponent implements OnInit {
 
   displayModal: boolean = false;
 
-  public roles: Category[] = []
+  public cate: Category[] = []
   public ELEMENT_DATA: Category[] = []
 
   displayedColumns: string[] = ['categoryName', 'categoryDescription', 'action'];
@@ -45,11 +45,6 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.loadCategory()
-    // this.DataServices.getCategoryList().subscribe((data) => {
-    //    this.roles = data;
-    //    console.log("roles: ",this.roles)
-       
-    // })
     this.dataSource.paginator = this.paginator;
   }
 
@@ -66,6 +61,7 @@ export class CategoriesComponent implements OnInit {
     console.log("update")
     this.DataServices.updateCategory(this.category.id, this.category).subscribe((data)=> {
       console.log('return-data update: ',data)
+      this.messageService.add({severity:'info', summary:'Notification', detail:'You have updated'});
       this.loadCategory()
       })
     this.ResetForm()
@@ -91,7 +87,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   public deleteCategory (id: number): void {
-    this.DataServices.deleteUser(id).subscribe((data)=> {
+    this.DataServices.deleteCategory(id).subscribe((data)=> {
       this.loadCategory()
     })
     
@@ -101,7 +97,6 @@ export class CategoriesComponent implements OnInit {
     this.displayModal = true;
   
 }
-
   confirmDelete(id: number, username: string) {
     this.confirmationService.confirm({
         message: 'Are you sure that you want to delete ' + username +'?',
