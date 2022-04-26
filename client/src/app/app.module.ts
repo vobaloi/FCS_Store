@@ -35,6 +35,7 @@ import { SingleProductComponent } from './single-product/single-product.componen
 import { ListProductsComponent } from './list-products/list-products.component';
 import { TableUsersComponent } from './Users/table-users/table-users.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { CategoriesComponent } from './categories/categories.component';
     ListProductsComponent,
     TableUsersComponent,
     CategoriesComponent,
+    SubCategoriesComponent,
 
   ],
   imports: [

@@ -67,5 +67,27 @@ export class DataService {
    public deleteCategory ( id: number | string) {
      return this.http.delete(this.apiUrl + `/Categories/${id}`)
    }
+
+   //subcategory
+   public getSubCategoryList(): Observable<any[]> {
+    return this.http.get<any>( this.apiUrl + `/SubCategories`)
+  }
+
+  public getSubCategoryByCateID ( id: number | string) {
+    return this.http.get(this.apiUrl + `/SubCategories/CateId/${id}`)
+  }
+
+  public addSubCategory ( data: any) {
+    return this.http.post(this.apiUrl + `/SubCategories`, data)
+  }
+
+  public updateSubCategory ( id: number | string, data: any) {
+    return this.http.put(this.apiUrl + `/SubCategories/${id}`, data)
+  }
+
+   public deleteSubCategory ( id: number | string) {
+     return this.http.delete(this.apiUrl + `/SubCategories/${id}`)
+   }
+
    
 }

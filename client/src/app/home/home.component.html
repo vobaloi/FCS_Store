@@ -1,7 +1,4 @@
-
-    
-    
-    <!-- ========================= SECTION MAIN ========================= -->
+        <!-- ========================= SECTION MAIN ========================= -->
     <section class="section-main bg padding-y">
     <div class="container">
     
@@ -9,14 +6,14 @@
         <aside class="col-md-3">
             <nav class="card" >
                 <ul class="menu-category">
-                    <li class="has-submenu" ><a href="#">Phones</a>
-                        <ul class="submenu">
-                            <li><a href="#">Phone 1</a></li>
+                    <li class="has-submenu" ><a href="products/phones">Phones</a>
+                        <ul class="submenu" >
+                            <li  *ngFor="let item of phones"><a href="products/{{item.subCategoryName}}">{{item.subCategoryName}}</a></li>
                         </ul>
                     </li>
-                    <li class="has-submenu"><a href="#">Accessories</a>
-                        <ul class="submenu">
-                            <li><a href="#">Accessory 1</a></li>
+                    <li class="has-submenu" ><a href="products/accessories">Accessories</a>
+                        <ul class="submenu" >
+                            <li *ngFor="let item of accessories"><a href="products/{{item.subCategoryName}}">{{item.subCategoryName}}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -24,7 +21,7 @@
         </aside> <!-- col.// -->
         <div class="col-md-9">
             <article class="banner-wrap">
-                <img src="assets/images/2.jpg" class="w-100 rounded">
+                <img src="https://mixkit.imgix.net/video-templates/preview/mixkit-smartphone-promo-596-5.jpg?q=80&auto=format%2Ccompress" class="w-100 rounded">
             </article>
         </div> <!-- col.// -->
     </div> <!-- row.// -->

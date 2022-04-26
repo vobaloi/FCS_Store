@@ -1,3 +1,4 @@
+import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { TableUsersComponent } from './Users/table-users/table-users.component';
 import { ListProductsComponent } from './list-products/list-products.component';
@@ -19,9 +20,10 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'cart', component: CartComponent },
   { path: 'single-item', component: SingleProductComponent },
-  { path: 'products', component: ListProductsComponent },
+  { path: 'products/:categories', component: ListProductsComponent },
   { path: 'users', component: TableUsersComponent },
   { path: 'categories', component: CategoriesComponent },
+  { path: 'subcategories', component: SubCategoriesComponent },
 
 
   { path: 'table-products', component: TableProductsComponent },
