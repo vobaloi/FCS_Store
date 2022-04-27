@@ -1,46 +1,167 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import { DataService } from './../../Services/data.service';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
+import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
 
 
 
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+
+export interface Product {
+  id: number;
+  productName: string;
+  price: number;
+  quantity: number;
+  imageURL: string;
+  subCategoryId: number;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+export interface SubCategory {
+  id: number
+  subCategoryName: string;
+  subCategoryDescription: string;
+  categoryId: number
+}
+
+
 @Component({
   selector: 'app-table-products',
   templateUrl: './table-products.component.html',
-  styleUrls: ['./table-products.component.scss']
+  styleUrls: ['./table-products.component.scss'],
+  providers: [ConfirmationService,MessageService]
 })
-export class TableProductsComponent implements AfterViewInit {
-  displayedColumns: string[] = ['position', 'productName', 'price', 'quality', 'action'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+export class TableProductsComponent implements OnInit {
+
+  displayModal: boolean = false;
+
+  public ELEMENT_DATA : Product[] = []
+
+  public products: Product[]
+  public subCategories : SubCategory[]
+
+  uploadedFiles: any[] = [];
+
+  displayedColumns: string[] = ['position','productName', 'price', 'quantity', 'subCategory','image','action'];
+  dataSource = new MatTableDataSource<Product>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator , {static: true}) paginator: MatPaginator ;
 
+  private newProduct : Product = {
+    id: 0,
+    productName: '',
+    price: 0,
+    quantity: 0,
+    imageURL: '',
+    subCategoryId: 0
+  }
+  public product: Product = Object.assign({}, this.newProduct)
 
-  constructor() { }
+  constructor(private DataServices: DataService, private confirmationService: ConfirmationService, private messageService: MessageService) { }
 
-  ngAfterViewInit() {
+
+  ngOnInit() {
+    this.loadProduct();
+    this.loadSubCategory()
     this.dataSource.paginator = this.paginator;
+  }
+
+  public loadProduct() {
+    this.DataServices.getProductList().subscribe((data) => {
+      this.dataSource.data = data as Product[]
+      console.log("products: ",data)
+    })
+  }
+
+  public loadSubCategory () {
+    this.DataServices.getSubCategoryList().subscribe((data) => {
+      this.subCategories = data as SubCategory[]
+      console.log("subcategory: ",data)
+    })
+  }
+  
+
+  public saveProduct () :void {
+    // console.log("data save", this.product)
+    if ( this.product.id !== 0) {
+    console.log("update", this.product)
+    this.DataServices.updateProduct(this.product.id, this.product).subscribe((data)=> {
+      console.log('return-data update: ',data)
+      this.messageService.add({severity:'info', summary:'Notification', detail:'You have updated'});
+      this.loadProduct()
+      })
+    this.ResetForm()
+    }
+    else {
+      console.log("add: ", this.product)
+      this.DataServices.addProduct(this.product).subscribe((data)=> {
+      console.log('return-data add new: ',data)
+      this.loadProduct()
+    })
+    this.ResetForm()
+    }
+  }
+
+  public ChangeSubCategory(event: any) : void {
+    this.product.subCategoryId= parseInt(event.value) 
+    console.log("id select", this.product.subCategoryId)
+  }
+
+
+  public showUpdateForm ( id: number, product : Product) : void {
+    this.product = product
+    console.log("data",this.product)
+    this.showModalDialog()
+  }
+
+  public deleteProduct (id: number): void {
+    this.DataServices.deleteProduct(id).subscribe((data)=> {
+      this.loadProduct()
+    })
+    
+  }
+
+  showModalDialog() {
+    this.displayModal = true;
+  
+}
+  confirmDelete(id: number, username: string) {
+    this.confirmationService.confirm({
+        message: 'Are you sure that you want to delete ' + username +'?',
+        header: 'Warning',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+            this.deleteProduct(id);
+            this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have accepted'});
+        },
+        reject: (type: any) => {
+            switch(type) {
+                case ConfirmEventType.REJECT:
+                    this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+                break;
+                case ConfirmEventType.CANCEL:
+                    this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+                break;
+            }
+        }
+    });
+}
+  public ResetForm () {
+  this.product = this.newProduct
+  this.displayModal= false
+  }
+  
+  public ChangeImage (event: any) {
+    console.log("Image", event.target.files[0])
+    if(event.target.files[0]) {
+      let reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.product.imageURL= event.target.result;
+        console.log("result", this.product.imageURL)
+      }
+    }
   }
 
 }

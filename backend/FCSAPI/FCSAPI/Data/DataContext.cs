@@ -17,5 +17,7 @@ namespace FCSAPI.Data
 
         public DbSet<SubCategory> SubCategories { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
     }
 }

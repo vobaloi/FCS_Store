@@ -89,5 +89,21 @@ export class DataService {
      return this.http.delete(this.apiUrl + `/SubCategories/${id}`)
    }
 
+   //products
+   public getProductList(): Observable<any[]> {
+    return this.http.get<any>( this.apiUrl + `/Products`)
+  }
+  public addProduct ( data: any) {
+    return this.http.post(this.apiUrl + `/Products`, data)
+  }
+
+  public updateProduct ( id: number | string, data: any) {
+    return this.http.put(this.apiUrl + `/Products/${id}`, data)
+  }
+
+   public deleteProduct ( id: number | string) {
+     return this.http.delete(this.apiUrl + `/Products/${id}`)
+   }
+
    
 }
