@@ -16,6 +16,8 @@ import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {FileUploadModule} from 'primeng/fileupload';
+import { RouterModule } from '@angular/router';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 
 
@@ -74,7 +76,9 @@ import { SubCategoriesComponent } from './sub-categories/sub-categories.componen
     MessagesModule,
     MessageModule,
     InputNumberModule,
-    FileUploadModule
+    FileUploadModule,
+    RouterModule,
+    ProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

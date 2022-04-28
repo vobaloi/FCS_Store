@@ -93,6 +93,19 @@ export class DataService {
    public getProductList(): Observable<any[]> {
     return this.http.get<any>( this.apiUrl + `/Products`)
   }
+
+  public getProductsBySubCategoryID(id: number): Observable<any[]> {
+    return this.http.get<any>( this.apiUrl + `/Products/SubId/${id}`)
+  }
+
+  public getRelateProduct (id:number) : Observable<any> {
+    return this.http.get<any> (this.apiUrl + `/Products/Diff/${id}`)
+  }
+  
+  public getProductById(id: number): Observable<any[]> {
+    return this.http.get<any>(this.apiUrl + `/Products/${id}` )
+  }
+
   public addProduct ( data: any) {
     return this.http.post(this.apiUrl + `/Products`, data)
   }

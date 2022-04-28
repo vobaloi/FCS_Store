@@ -35,11 +35,17 @@ namespace FCSAPI.Controllers
             return await _context.Products.Include(r => r.SubCategory).ToListAsync();
         }
 
+        [HttpGet("SubId/{id}")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProductsBySubCategoryId( int id)
+        {
+            return await _context.Products.Where(x => x.SubCategoryId.Equals(id)).Include(r => r.SubCategory).ToListAsync();
+        }
+
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<Product>> GetProductById(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.Where(x=>x.Id.Equals(id)).Include(r=> r.SubCategory).FirstOrDefaultAsync();
 
             if (product == null)
             {
@@ -47,6 +53,27 @@ namespace FCSAPI.Controllers
             }
 
             return product;
+        }
+
+        //// GET: api/Products/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<IEnumerable<Product>>> GetRelateProduct(int id)
+        //{
+        //    return await _context.Products.Where(x => x.Id.Equals(id)).Include(r => r.SubCategory).FirstOrDefaultAsync();
+
+        //    //if (product == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
+
+        //    //return product;
+        //}
+
+        // GET: api/Products
+        [HttpGet("Diff/{id}")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetRelateProducts(int id)
+        {
+            return await _context.Products.Where(x=>x.Id != id).Include(r => r.SubCategory).ToListAsync();
         }
 
         // PUT: api/Products/5
