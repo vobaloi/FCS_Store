@@ -18,6 +18,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {FileUploadModule} from 'primeng/fileupload';
 import { RouterModule } from '@angular/router';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {PasswordModule} from 'primeng/password';
 
 
 
@@ -78,7 +79,8 @@ import { SubCategoriesComponent } from './sub-categories/sub-categories.componen
     InputNumberModule,
     FileUploadModule,
     RouterModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    PasswordModule
   ],
   providers: [],
   bootstrap: [AppComponent]

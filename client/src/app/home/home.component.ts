@@ -104,5 +104,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/single-item/', item.id])
   }
   
+  public AddCart (item : any) {
+    console.log("item", item)
+  }
 
 }

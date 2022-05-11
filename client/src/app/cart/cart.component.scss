@@ -4,3 +4,62 @@
 .inputnumber {
     text-align: center;
 }
+
+
+.card {
+    height: 55vh;
+    width: 100%;
+    padding: 25px;
+}
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.center img {
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    outline: none;
+    height: 162px;
+    width: 250px;
+    margin: 20px 0px;
+}
+
+.cart {
+    align-items: center;
+    justify-content: space-between;
+    width: 20%;
+    
+}
+.button_icon {
+    width: 20%;
+    justify-content: space-between;
+    align-items: center;
+}
+.icon {
+    font-size: 1.5rem;
+    color: black;
+    background-color: white;
+    border-radius: 50%;
+    border-color: white;
+    padding: 2px;
+    border: 2px solid;
+    cursor: pointer;
+}
+.icon:hover {
+    background-color: #343a40;
+}
+.qnt {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.btnCart {
+    text-align: -webkit-center;
+}
+

@@ -1,4 +1,5 @@
-<section class="py-5">
+<p-toast></p-toast>
+<section class="py-5" *ngIf="true">
   <div class="container px-4 px-lg-5 my-5">
   <div class="row">
     <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
@@ -23,22 +24,24 @@
           </thead>
           <tbody>
 
-            <tr>
+            <tr *ngFor="let item of products">
               <th scope="row">
                 <div class="p-2">
-                  <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="" width="70" class="img-fluid rounded shadow-sm">
+                  <img src="{{item.imageURL}}" alt="" width="70" class="img-fluid rounded shadow-sm">
                   <div class="ms-3 d-inline-block align-middle">
-                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block"> <strong>Product 3</strong></a></h5>
+                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block"> <strong>{{item.productName}}</strong></a></h5>
                   </div>
                 </div>
               </th>
-                <td class="align-middle"><strong >{{value19*price}}$</strong></td>
-                <td class="align-middle">
-                  <div class="inputnumber">
-                  <p-inputNumber [(ngModel)]="value19" [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal" inputId="horizontal"
-                  decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
-                  </p-inputNumber>
-                </div>
+                <td class="align-middle"><strong >{{item.quantity_Buy*item.price}}$</strong></td>
+                <td class="align-middle btnCart">
+                  <div class="d-flex cart ">  
+                    <div div class="button_icon d-flex">
+                         <i (click)="dec(item)" class="icon pi pi-minus"></i>
+                         <div class="qnt"><span >{{item.quantity_Buy}}</span></div>
+                         <i  (click)="inc(item)" class="icon pi pi-plus"></i>
+                     </div>
+                 </div>
                 </td>
                 <td class="align-middle"><a href="#" class="text-dark"><i class="pi pi-trash"></i></a>
                 </td>
@@ -72,7 +75,7 @@
       <div class="p-4">
         <p class="mb-4"><em>Shipping and additional costs are calculated based on values you have entered.</em></p>
         <ul class="list-unstyled mb-4">
-          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$390.00</strong></li>
+          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>${{totalPrice}}</strong></li>
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
@@ -83,4 +86,19 @@
     </div>
   </div>
 </div>
+</section>
+
+
+<section class="py-5" *ngIf="false">
+  <div class="container">
+    <div class="card">
+      <h3 class="card-title"> My cart</h3>
+    </div>
+    <div class="center">
+      <img src="https://cdni.iconscout.com/illustration/premium/thumb/confusing-woman-due-to-empty-cart-4558760-3780056.png" alt="">
+      <h4>You cart is empty</h4>
+      <h5>Add item to it now</h5>
+      <button routerLink="/" class="btn btn-primary"> Shop now </button>
+    </div>
+  </div>
 </section>

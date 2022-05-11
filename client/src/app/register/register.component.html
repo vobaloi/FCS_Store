@@ -5,11 +5,11 @@
          <div class="col-lg-6 px-lg-4">
           <div class="card">
             <div class="card-header px-lg-5">
-              <div class="card-heading text-primary">Jassa Register</div>
+              <div class="card-heading text-primary"><h3>FCS Register</h3></div>
             </div>
             <div class="card-body p-lg-5">
-              <h3 class="mb-4">Get started with Chamkila</h3>
-              <p class="text-muted text-sm mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <h3 class="mb-0"></h3>
+              <p class="text-muted text-sm mb-1">Register an account by Email & Password</p>
               <form action="index.html">
                 <div class="form-floating mb-3">
                   <input class="form-control" id="username" type="email" placeholder="name@example.com" required>
@@ -20,8 +20,24 @@
                   <label for="floatingInput">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input class="form-control" id="floatingPassword" type="password" placeholder="Password" required>
+                  <input pPassword id="floatingPassword" type="password" [(ngModel)]="value4" placeholder="Password" required>
                   <label for="floatingPassword">Password</label>
+                  <!-- <p-password class="form-control" [(ngModel)]="value4">
+                    <ng-template pTemplate="header">
+                        <h6>Pick a password</h6>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-divider></p-divider>
+                        <p class="mt-2">Suggestions</p>
+                        <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                            <li>At least one lowercase</li>
+                            <li>At least one uppercase</li>
+                            <li>At least one numeric</li>
+                            <li>Minimum 8 characters</li>
+                        </ul>
+                    </ng-template>
+                </p-password> -->
+                  
                 </div>
                 <div class="form-check mb-3">
                   <input class="form-check-input" type="checkbox" name="agree" id="agree">
@@ -33,13 +49,13 @@
               </form>
             </div>
             <div class="card-footer px-lg-5 py-lg-4">
-              <div class="text-sm text-muted">Already have an account? <a >Login</a>.</div>
+              <div class="text-sm text-muted">Already have an account? <a href="/login" >Login</a>.</div>
             </div>
           </div>
         </div>
-       <div class="col-lg-6 col-xl-5 ms-xl-auto px-lg-4 text-center text-primary"><img class="img-fluid mb-4" width="300" src="https://therichpost.com/wp-content/uploads/2021/06/login_page_image.png" alt="" style="transform: rotate(5deg)">
-          <h1 class="mb-4">Therichpost.com <br class="d-none d-lg-inline">free code  snippets.</h1>
-          <p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+       <div class="col-lg-6 col-xl-5 ms-xl-auto px-lg-4 text-center text-primary"><img class="img-fluid mb-4" width="300" src="https://img.freepik.com/free-vector/smart-phone-store-logo-vector_8169-118.jpg" alt="" style="transform: rotate(5deg)">
+        <h1 class="mb-4">FPT Cellphone Store <br class="d-none d-lg-inline">nice to meet you</h1>
+        <h3 class="lead text-muted">We will provide you with the best service</h3>
         </div>
       </div>
     </div>

@@ -40,14 +40,19 @@
     <div class="row">
         <p-progressSpinner class="spinner" *ngIf="products.length == 0" [style]="{ width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
         <div class="col-md-3" *ngFor="let item of products | slice:0:sliceDefault;">
-            <div (click)="onSelectProduct(item)" class="card card-product-grid" >
-                <span class="img-wrap"> <img src="{{item.imageURL}}"> </span>
-                <figcaption class="info-wrap">
-                    <strong  class="title">{{item.productName}}</strong>
-                    <div class="price mt-1">Price: ${{item.price}}</div> <!-- price-wrap.// -->
-                    <button class="btn btn-success"> Cart </button>
-                </figcaption>       
+            <div class="card card-product-grid">
+                <div (click)="onSelectProduct(item)">
+                    <span  class="img-wrap"> <img  src="{{item.imageURL}}"> </span>
+                    <figcaption class="info-wrap">
+                        <strong class="title pointer-event">{{item.productName}}</strong>
+                        <div class="price mt-1">Price: ${{item.price}}</div> <!-- price-wrap.// -->
+                    </figcaption>
+                </div>
+                <div class="btnCart">
+                    <button type="button" class="btn btn-success" (click)="AddCart(item)" > Cart </button>
+                </div>   
             </div>
+           
         </div> <!-- col.// -->
     </div> <!-- row.// -->
     

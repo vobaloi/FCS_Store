@@ -1,17 +1,59 @@
+import { CartService } from './../Services/cart.service';
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
+  providers: [MessageService]
 })
 export class CartComponent implements OnInit {
 
-  value19: number = 3;
-  price: number = 100;
-  constructor() { }
+  
+  public products : any = []
+  public totalPrice : number = 0 
+  public productPrices : any = []
+
+  constructor(private messageService: MessageService, private cartService : CartService) { }
 
   ngOnInit(): void {
-  }
+    this.cartService.getProducts().subscribe((res: any) => {
+      this.products = res;
+      console.log(this.products)
+    })
 
+    
+    console.log(this.products)
+  }
+  public dec (item : any) {
+    for (let i =0; i<this.products.length; i++ ) {
+      if(item.id === this.products[i].id) {
+        this.products[i].quantity_Buy -=1;
+        if(this.products[i].quantity_Buy<=0) {
+          this.products[i].quantity_Buy= 1
+          this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Quantity must be than to 0'});
+        }
+        else {
+          console.log("subPrice", item.price * this.products[i].quantity_Buy) 
+        }
+      }
+    }
+  }
+  public inc (item : any) {
+    for (let i =0; i<this.products.length; i++ ) {
+      if(item.id === this.products[i].id) {
+        this.products[i].quantity_Buy +=1;
+        if(this.products[i].quantity_Buy >= this.products[i].quantity) {
+          this.products[i].quantity_Buy = this.products[i].quantity
+          this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Quantity must be less than the quantity of Store'});
+        }
+        else {
+         
+          let abc = item.price * this.products[i].quantity_Buy
+          console.log("sub",abc) 
+        }
+      }
+    }
+  }
 }

@@ -11,16 +11,29 @@
             <div class="col-md-6">
                 <!-- <div class="small mb-1">SKU: BST-498</div> -->
                 <h1 class="display-5 fw-bolder">{{product.productName}}</h1>
-                <div class="fs-5 mb-5">
+                <div class="fs-5 mb-2">
                     <span class="text-decoration-line-through"></span>
                     <span> Price: ${{product.price}}</span>
+                    
+                </div>
+                <div class="fs-5 mb-3">
+                    <span> Quantity: {{product.quantity}}</span>
                 </div>
                 <!-- <p class="lead">{{product}}</p> -->
-                <div class="d-flex">  
-                    <p-inputNumber  class="text-center me-3" [(ngModel)]="value" [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal" inputId="horizontal"
-                  decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
-                  </p-inputNumber>
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                <div class="d-flex cart ">  
+                   <div div class="button_icon d-flex">
+                        <i (click)="dec()" class="icon pi pi-minus"></i>
+                        <div class="quantity"><span >{{quantity_buy}}</span></div>
+                        <i  (click)="inc()" class="icon pi pi-plus"></i>
+                    </div>
+                </div>
+                <!-- <div class="field col-12 md:col-3">
+                    <p-inputNumber [(ngModel)]="value19" [showButtons]="true" buttonLayout="horizontal" spinnerMode="vertical" inputId="vertical"
+                    decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                    </p-inputNumber>
+                </div> -->
+                <div class="mt-3">
+                    <button (click)="SelectProduct(product)" class="btn btn-outline-dark flex-shrink-0" type="button">
                         <i class="bi-cart-fill me-1"></i>
                         Add to cart
                     </button>

@@ -1,3 +1,4 @@
+import { CartService } from './../Services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../Services/data.service';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router"
@@ -10,6 +11,7 @@ export interface Product {
   quantity: number;
   imageURL: string;
   subCategoryId: number;
+  quantity_Buy: number
 }
 
 @Component({
@@ -18,7 +20,7 @@ export interface Product {
   styleUrls: ['./single-product.component.scss']
 })
 export class SingleProductComponent implements OnInit {
-  public value= 2
+  public quantity_buy: number = 1;
 
   public param : any
   public productGet : any
@@ -34,12 +36,13 @@ export class SingleProductComponent implements OnInit {
     quantity: 0,
     imageURL: '',
     subCategoryId: 0,
+    quantity_Buy: 0
   }
-  public product: Product = Object.assign({}, this.newProduct)
 
+  public product: Product = Object.assign({}, this.newProduct)
   public relateProduct: Product = Object.assign({}, this.newProduct)
 
-  constructor(private DataServices: DataService, private route: ActivatedRoute, private router : Router ) { }
+  constructor(private DataServices: DataService, private route: ActivatedRoute, private router : Router , private cartService : CartService ) { }
 
   ngOnInit(): void {
     // let id = parseInt(this.route.snapshot.params['id'])
@@ -51,6 +54,7 @@ export class SingleProductComponent implements OnInit {
       this.productId = id;
       this.loadProduct()
       this.loadRelateProduct()
+      this.quantity_buy = 1
     })
   }
 
@@ -74,4 +78,61 @@ export class SingleProductComponent implements OnInit {
 
   }
 
+  public dec () {
+    this.quantity_buy -=1
+    if( this.quantity_buy<0)
+    this.quantity_buy = 0
+  }
+  public inc () {
+    this.quantity_buy += 1
+    if(this.quantity_buy> this.product.quantity)
+    this.quantity_buy = this.product.quantity
+  }
+
+
+  // public itemsCart: any = []
+  // public SelectProduct(item: any) {
+  //   this.product.quantity_Buy = this.quantity_buy
+  //   console.log("product", item)
+  //   let cartDataNull = localStorage.getItem("cartProduct")
+  //   if(cartDataNull == null) {
+  //     let storeDataGet : any = []
+  //     storeDataGet.push(item)
+  //     localStorage.setItem("cartProduct", JSON.stringify(storeDataGet))
+  //   } else {
+  //     var id = item.id
+  //     let index: number = -1;
+  //     this.itemsCart = JSON.parse(localStorage.getItem("cartProduct")!); 
+  //     // console.log("cart_product", this.itemsCart)
+  //     for(let i = 0 ;  i < this.itemsCart.length; i++) {
+  //       if (parseInt(id) === parseInt(this.itemsCart[i].id)) {
+  //         this.itemsCart[i].quantity_Buy = this.quantity_buy
+  //         index = i;
+  //         break;
+  //       }
+  //     }
+  //     if (index == -1) {
+  //       this.itemsCart.push(item)
+  //       localStorage.setItem('cartProduct', JSON.stringify(this.itemsCart))
+  //     } else {
+  //       localStorage.setItem('cartProduct', JSON.stringify(this.itemsCart))
+  //     }
+  //   }
+  //   this.cartNumberFunc()
+  // }
+  //   public cartNumber : number = 0
+  //   public cartNumberFunc() {
+  //     var cartValue = JSON.parse(localStorage.getItem("cartProduct")!) 
+  //     this.cartNumber= cartValue.length;
+  //     console.log("cartNumber", this.cartNumber)
+  //   }
+
+
+
+  public SelectProduct(item: any) {
+    this.product.quantity_Buy = this.quantity_buy
+    console.log("product", item)
+
+    this.cartService.addToCart(item);
+  }
 }
