@@ -10,19 +10,19 @@ import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api
 
 
 export interface Product {
-  id: number;
-  productName: string;
-  price: number;
-  quantity: number;
-  imageURL: string;
-  subCategoryId: number;
+  Id: number;
+  ProductName: string;
+  Price: number;
+  Quantity: number;
+  ImageURL: string;
+  SubCategoryId: number;
 }
 
 export interface SubCategory {
-  id: number
-  subCategoryName: string;
-  subCategoryDescription: string;
-  categoryId: number
+  Id: number
+  SubCategoryName: string;
+  SubCategoryDescription: string;
+  CategoryId: number
 }
 
 
@@ -49,12 +49,12 @@ export class TableProductsComponent implements OnInit {
   @ViewChild(MatPaginator , {static: true}) paginator: MatPaginator ;
 
   private newProduct : Product = {
-    id: 0,
-    productName: '',
-    price: 0,
-    quantity: 0,
-    imageURL: '',
-    subCategoryId: 0
+    Id: 0,
+    ProductName: '',
+    Price: 0,
+    Quantity: 0,
+    ImageURL: '',
+    SubCategoryId: 0
   }
   public product: Product = Object.assign({}, this.newProduct)
 
@@ -84,9 +84,9 @@ export class TableProductsComponent implements OnInit {
 
   public saveProduct () :void {
     // console.log("data save", this.product)
-    if ( this.product.id !== 0) {
+    if ( this.product.Id !== 0) {
     console.log("update", this.product)
-    this.DataServices.updateProduct(this.product.id, this.product).subscribe((data)=> {
+    this.DataServices.updateProduct(this.product.Id, this.product).subscribe((data)=> {
       console.log('return-data update: ',data)
       this.messageService.add({severity:'info', summary:'Notification', detail:'You have updated'});
       this.loadProduct()
@@ -104,8 +104,8 @@ export class TableProductsComponent implements OnInit {
   }
 
   public ChangeSubCategory(event: any) : void {
-    this.product.subCategoryId= parseInt(event.value) 
-    console.log("id select", this.product.subCategoryId)
+    this.product.SubCategoryId= parseInt(event.value) 
+    console.log("id select", this.product.SubCategoryId)
   }
 
 
@@ -158,8 +158,8 @@ export class TableProductsComponent implements OnInit {
       let reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
-        this.product.imageURL= event.target.result;
-        console.log("result", this.product.imageURL)
+        this.product.ImageURL= event.target.result;
+        console.log("result", this.product.ImageURL)
       }
     }
   }

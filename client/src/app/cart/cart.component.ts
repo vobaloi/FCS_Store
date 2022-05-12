@@ -28,10 +28,10 @@ export class CartComponent implements OnInit {
   }
   public dec (item : any) {
     for (let i =0; i<this.products.length; i++ ) {
-      if(item.id === this.products[i].id) {
-        this.products[i].quantity_Buy -=1;
-        if(this.products[i].quantity_Buy<=0) {
-          this.products[i].quantity_Buy= 1
+      if(item.Id === this.products[i].Id) {
+        this.products[i].Quantity_Buy -=1;
+        if(this.products[i].Quantity_Buy<=0) {
+          this.products[i].Quantity_Buy= 1
           this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Quantity must be than to 0'});
         }
         else {
@@ -42,15 +42,15 @@ export class CartComponent implements OnInit {
   }
   public inc (item : any) {
     for (let i =0; i<this.products.length; i++ ) {
-      if(item.id === this.products[i].id) {
-        this.products[i].quantity_Buy +=1;
-        if(this.products[i].quantity_Buy >= this.products[i].quantity) {
-          this.products[i].quantity_Buy = this.products[i].quantity
+      if(item.Id === this.products[i].Id) {
+        this.products[i].Quantity_Buy +=1;
+        if(this.products[i].Quantity_Buy >= this.products[i].Quantity) {
+          this.products[i].Quantity_Buy = this.products[i].Quantity
           this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Quantity must be less than the quantity of Store'});
         }
         else {
          
-          let abc = item.price * this.products[i].quantity_Buy
+          let abc = item.Price * this.products[i].Quantity_Buy
           console.log("sub",abc) 
         }
       }

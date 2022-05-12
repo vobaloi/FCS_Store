@@ -8,9 +8,9 @@ import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api
 
 
 export interface Category {
-  id: number
-  categoryName: string;
-  categoryDescription: string;
+  Id: number
+  CategoryName: string;
+  CategoryDescription: string;
 }
 
 @Component({
@@ -32,9 +32,9 @@ export class CategoriesComponent implements OnInit {
 
 
   private newCate : Category ={
-    id: 0,
-    categoryName:'',
-    categoryDescription:'',
+    Id: 0,
+    CategoryName:'',
+    CategoryDescription:'',
   }
 
   public category: Category = Object.assign({}, this.newCate)
@@ -57,9 +57,9 @@ export class CategoriesComponent implements OnInit {
   
 
   public saveCategory () :void {
-    if ( this.category.id !== 0) {
+    if ( this.category.Id !== 0) {
     console.log("update")
-    this.DataServices.updateCategory(this.category.id, this.category).subscribe((data)=> {
+    this.DataServices.updateCategory(this.category.Id, this.category).subscribe((data)=> {
       console.log('return-data update: ',data)
       this.messageService.add({severity:'info', summary:'Notification', detail:'You have updated'});
       this.loadCategory()
@@ -83,6 +83,7 @@ export class CategoriesComponent implements OnInit {
 
   public showUpdateForm ( id: number, category : Category) : void {
     this.category = category
+    console.log("cate", category)
     this.showModalDialog()
   }
 

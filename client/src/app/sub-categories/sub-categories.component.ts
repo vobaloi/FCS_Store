@@ -6,17 +6,17 @@ import {MatTableDataSource} from '@angular/material/table';
 import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
 
 export interface SubCategory {
-  id: number
-  subCategoryName: string;
-  subCategoryDescription: string;
-  categoryId: number
+  Id: number
+  SubCategoryName: string;
+  SubCategoryDescription: string;
+  CategoryId: number
 }
 
 
 export interface Category {
-  id: number
-  categoryName: string;
-  categoryDescription: string;
+  Id: number
+  CategoryName: string;
+  CategoryDescription: string;
 }
 
 @Component({
@@ -38,10 +38,10 @@ export class SubCategoriesComponent implements OnInit {
   dataSource = new MatTableDataSource<SubCategory>(this.ELEMENT_DATA);
 
   private newSubCategory : SubCategory = {
-    id: 0,
-    subCategoryName: '',
-    subCategoryDescription: '',
-    categoryId: 0,
+    Id: 0,
+    SubCategoryName: '',
+    SubCategoryDescription: '',
+    CategoryId: 0,
   }
 
   public subCategory: SubCategory = Object.assign({}, this.newSubCategory)
@@ -70,9 +70,9 @@ export class SubCategoriesComponent implements OnInit {
   
 
   public saveCategory () :void {
-    if ( this.subCategory.id !== 0) {
+    if ( this.subCategory.Id !== 0) {
     console.log("update")
-    this.DataServices.updateSubCategory(this.subCategory.id, this.subCategory).subscribe((data)=> {
+    this.DataServices.updateSubCategory(this.subCategory.Id, this.subCategory).subscribe((data)=> {
       console.log('return-data update: ',data)
       this.messageService.add({severity:'info', summary:'Notification', detail:'You have updated'});
       this.loadSubCategory()
@@ -90,8 +90,8 @@ export class SubCategoriesComponent implements OnInit {
   }
 
   public ChangeCategory(event: any) : void {
-    this.subCategory.categoryId= parseInt(event.value) 
-    console.log("id select", this.subCategory.categoryId)
+    this.subCategory.CategoryId= parseInt(event.value) 
+    console.log("id select", this.subCategory.CategoryId)
   }
 
 
@@ -111,9 +111,9 @@ export class SubCategoriesComponent implements OnInit {
     this.displayModal = true;
   
 }
-  confirmDelete(id: number, username: string) {
+  confirmDelete(id: number, subCateName: string) {
     this.confirmationService.confirm({
-        message: 'Are you sure that you want to delete ' + username +'?',
+        message: 'Are you sure that you want to delete ' + subCateName +'?',
         header: 'Warning',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {

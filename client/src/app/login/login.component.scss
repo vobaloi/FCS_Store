@@ -62,3 +62,15 @@
     text-decoration: underline!important;
     cursor: pointer;
     }
+    .hide {
+        display: none;
+      }    
+    .password-div{
+        position: relative;
+       .eye-b {
+        color: black;
+        position: absolute;
+        top: 15px;
+        right: 10px;
+       }
+      }

@@ -34,6 +34,9 @@ export class DataService {
      return this.http.delete(this.apiUrl + `/Users/${id}`)
    }
 
+   public login (data : any) {
+     return this.http.post(this.apiUrl + `/Users/Login`, data )
+   }
 
    //Roles
    public getRoleList(): Observable<any[]> {

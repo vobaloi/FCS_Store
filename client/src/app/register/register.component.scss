@@ -62,3 +62,32 @@
     text-decoration: underline!important;
     cursor: pointer;
     }
+
+//     /* app.component.css */
+.hide {
+    display: none;
+  }
+
+.password-div{
+    position: relative;
+   .eye-b {
+    color: black;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+   }
+  }
+//   .inner-addon { 
+//       position: relative; 
+//   }
+//   .inner-addon .pi {
+//     position: absolute;
+//     padding: 10px 30px;
+//     z-index: 100;
+//     cursor: pointer;
+//   }
+//   .left-addon .pi  { left:  0px; }
+//   .right-addon .pi { right: 0px; }
+   
+//   .left-addon input  { padding-left:  30px; }
+//   .right-addon input { padding-right: 30px; }

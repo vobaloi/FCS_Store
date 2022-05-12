@@ -5,7 +5,6 @@ import {MatTableModule} from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
@@ -19,6 +18,8 @@ import {FileUploadModule} from 'primeng/fileupload';
 import { RouterModule } from '@angular/router';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {PasswordModule} from 'primeng/password';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -80,8 +81,10 @@ import { SubCategoriesComponent } from './sub-categories/sub-categories.componen
     FileUploadModule,
     RouterModule,
     ProgressSpinnerModule,
-    PasswordModule
+    PasswordModule,
+    ReactiveFormsModule
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

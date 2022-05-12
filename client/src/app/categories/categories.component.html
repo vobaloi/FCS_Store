@@ -11,20 +11,20 @@
           <!-- Name Column -->
           <ng-container matColumnDef="categoryName">
             <th mat-header-cell *matHeaderCellDef > Category Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.CategoryName}} </td>
           </ng-container>
         
           <!-- Weight Column -->
           <ng-container matColumnDef="categoryDescription">
             <th mat-header-cell *matHeaderCellDef> Description </th>
-            <td mat-cell *matCellDef="let element"> {{element.categoryDescription}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.CategoryDescription}} </td>
           </ng-container>
         
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef >  </th>
             <td mat-cell *matCellDef="let element"> 
-              <button class="border-0 bg-white m-lg-1" (click)="showUpdateForm(element.id, element)"><mat-icon>edit</mat-icon></button>
-              <button class="border-0 bg-white" (click)="confirmDelete(element.id, element.categoryName)"><mat-icon>delete</mat-icon></button>
+              <button class="border-0 bg-white m-lg-1" (click)="showUpdateForm(element.Id, element)"><mat-icon>edit</mat-icon></button>
+              <button class="border-0 bg-white" (click)="confirmDelete(element.Id, element.CategoryName)"><mat-icon>delete</mat-icon></button>
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -40,7 +40,7 @@
   </section>
 
 <!-- dialog -->
-<p-dialog header="User details" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+<p-dialog header="Category details" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
   [draggable]="false" [resizable]="false">
   <p-divider></p-divider>
   <div class="form-body">
@@ -51,12 +51,12 @@
                     <p>Fill in the data below</p>
                     <form class="requires-validation" novalidate>
                         <div class="col-md-12">
-                            <input class="form-control" type="text" name="categoryName" placeholder="Category Name" [(ngModel)] = "category.categoryName" required>
+                            <input class="form-control" type="text" name="categoryName" placeholder="Category Name" [(ngModel)] = "category.CategoryName" required>
                              <div class="valid-feedback">Email field is valid!</div>
                              <div class="invalid-feedback">Email field cannot be blank!</div>
                         </div>
                         <div class="col-md-12">
-                          <input class="form-control" type="text" name="categoryDescription" placeholder="Category Description" [(ngModel)] = "category.categoryDescription" required>
+                          <input class="form-control" type="text" name="categoryDescription" placeholder="Category Description" [(ngModel)] = "category.CategoryDescription" required>
                            <div class="valid-feedback">Password field is valid!</div>
                            <div class="invalid-feedback">Password field cannot be blank!</div>
                        </div>

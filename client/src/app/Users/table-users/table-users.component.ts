@@ -8,21 +8,18 @@ import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api
 
 
 
-
-
-
 export interface User {
-  id: number 
-  email: string;
-  password: string
-  userName: string;
-  address: string;
-  roleId: number;
-  telephone: string
+  Id: number 
+  Email: string;
+  Password: string
+  UserName: string;
+  Address: string;
+  RoleId: number;
+  Telephone: string
 }
 export interface Role {
-  id: number
-  roleName: string;
+  Id: number
+  RoleName: string;
 }
 
 
@@ -49,18 +46,18 @@ export class TableUsersComponent implements OnInit {
   }
 
   private newUser : User = {
-    id: 0,
-    email: '',
-    userName: '',
-    password: '',
-    address: '',
-    roleId:0,
-    telephone:''
+    Id: 0,
+    Email: '',
+    UserName: '',
+    Password: '',
+    Address: '',
+    RoleId:0,
+    Telephone:''
   }
 
   private newRole : Role ={
-    id: 0,
-    roleName:''
+    Id: 0,
+    RoleName:''
   }
 
   public user: User = Object.assign({}, this.newUser)
@@ -94,9 +91,9 @@ export class TableUsersComponent implements OnInit {
   
 
   public SaveUser () :void {
-    if ( this.user.id !== 0) {
+    if ( this.user.Id !== 0) {
     console.log("update")
-    this.DataServices.updateUser(this.user.id, this.user).subscribe((data)=> {
+    this.DataServices.updateUser(this.user.Id, this.user).subscribe((data)=> {
       console.log('return-data update: ',data)
       this.loadUser()
       })
@@ -113,7 +110,7 @@ export class TableUsersComponent implements OnInit {
   }
 
   public ChangeRole(event: any) : void {
-    this.user.roleId= parseInt(event.value) 
+    this.user.RoleId= parseInt(event.value) 
   }
 
 

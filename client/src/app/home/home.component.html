@@ -8,12 +8,12 @@
                 <ul class="menu-category">
                     <li class="has-submenu" ><a >Phones</a>
                         <ul class="submenu" >
-                            <li  *ngFor="let item of phones"><a (click)="onSelectSubcategory(item)" >{{item.subCategoryName}}</a></li>
+                            <li  *ngFor="let item of phones"><a (click)="onSelectSubcategory(item)" >{{item.SubCategoryName}}</a></li>
                         </ul>
                     </li>
                     <li class="has-submenu" ><a >Accessories</a>
                         <ul class="submenu" >
-                            <li *ngFor="let item of accessories"><a (click)="onSelectSubcategory(item)" >{{item.subCategoryName}}</a></li>
+                            <li *ngFor="let item of accessories"><a (click)="onSelectSubcategory(item)" >{{item.SubCategoryName}}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -42,10 +42,10 @@
         <div class="col-md-3" *ngFor="let item of products | slice:0:sliceDefault;">
             <div class="card card-product-grid">
                 <div (click)="onSelectProduct(item)">
-                    <span  class="img-wrap"> <img  src="{{item.imageURL}}"> </span>
+                    <span  class="img-wrap"> <img  src="{{item.ImageURL}}"> </span>
                     <figcaption class="info-wrap">
-                        <strong class="title pointer-event">{{item.productName}}</strong>
-                        <div class="price mt-1">Price: ${{item.price}}</div> <!-- price-wrap.// -->
+                        <strong class="title pointer-event">{{item.ProductName}}</strong>
+                        <div class="price mt-1">Price: ${{item.Price}}</div> <!-- price-wrap.// -->
                     </figcaption>
                 </div>
                 <div class="btnCart">

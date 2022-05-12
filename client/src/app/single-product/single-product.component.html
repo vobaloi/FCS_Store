@@ -2,22 +2,22 @@
 <section  class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center" >
-            <div class="col-md-6"  *ngIf="product.imageURL.length < 0">
+            <div class="col-md-6"  *ngIf="product.ImageURL.length < 0">
                 <p-progressSpinner class="spinner" [style]="{ width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
             </div>
-            <div class="col-md-6" *ngIf="product.imageURL.length > 0">
-                <img class="card-img-top mb-5 mb-md-0" src="{{product.imageURL}}" alt="...">
+            <div class="col-md-6" *ngIf="product.ImageURL.length > 0">
+                <img class="card-img-top mb-5 mb-md-0" src="{{product.ImageURL}}" alt="...">
             </div>
             <div class="col-md-6">
                 <!-- <div class="small mb-1">SKU: BST-498</div> -->
-                <h1 class="display-5 fw-bolder">{{product.productName}}</h1>
+                <h1 class="display-5 fw-bolder">{{product.ProductName}}</h1>
                 <div class="fs-5 mb-2">
                     <span class="text-decoration-line-through"></span>
-                    <span> Price: ${{product.price}}</span>
+                    <span> Price: ${{product.Price}}</span>
                     
                 </div>
                 <div class="fs-5 mb-3">
-                    <span> Quantity: {{product.quantity}}</span>
+                    <span> Quantity: {{product.Quantity}}</span>
                 </div>
                 <!-- <p class="lead">{{product}}</p> -->
                 <div class="d-flex cart ">  
@@ -50,16 +50,16 @@
             <div class="col mb-5"  *ngFor="let item of relateProducts | slice:0:4" (click) ="onSelectProduct(item)">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top" height="250" src="{{item.imageURL}}" alt="...">
+                    <img class="card-img-top" height="250" src="{{item.ImageURL}}" alt="...">
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
                             <div>
-                            <strong class="fw-bolder mb-2">{{item.productName}}</strong>
+                            <strong class="fw-bolder mb-2">{{item.ProductName}}</strong>
                             </div>
                             <!-- Product price-->
-                            <strong >Price: </strong>${{item.price}}
+                            <strong >Price: </strong>${{item.Price}}
                         </div>
                     </div>
                     <!-- Product actions-->

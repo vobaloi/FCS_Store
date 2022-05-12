@@ -5,13 +5,13 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router"
 
 
 export interface Product {
-  id: number;
-  productName: string;
-  price: number;
-  quantity: number;
-  imageURL: string;
-  subCategoryId: number;
-  quantity_Buy: number
+  Id: number;
+  ProductName: string;
+  Price: number;
+  Quantity: number;
+  ImageURL: string;
+  SubCategoryId: number;
+  Quantity_Buy: number
 }
 
 @Component({
@@ -30,13 +30,13 @@ export class SingleProductComponent implements OnInit {
 
 
   private newProduct : Product ={
-    id: 0,
-    productName: '',
-    price: 0,
-    quantity: 0,
-    imageURL: '',
-    subCategoryId: 0,
-    quantity_Buy: 0
+    Id: 0,
+    ProductName: '',
+    Price: 0,
+    Quantity: 0,
+    ImageURL: '',
+    SubCategoryId: 0,
+    Quantity_Buy: 0
   }
 
   public product: Product = Object.assign({}, this.newProduct)
@@ -74,7 +74,7 @@ export class SingleProductComponent implements OnInit {
 
   public onSelectProduct (item: any) {
     // console.log("item",item)
-    this.router.navigate(['/single-item/', item.id])
+    this.router.navigate(['/single-item/', item.Id])
 
   }
 
@@ -85,8 +85,8 @@ export class SingleProductComponent implements OnInit {
   }
   public inc () {
     this.quantity_buy += 1
-    if(this.quantity_buy> this.product.quantity)
-    this.quantity_buy = this.product.quantity
+    if(this.quantity_buy> this.product.Quantity)
+    this.quantity_buy = this.product.Quantity
   }
 
 
@@ -130,7 +130,7 @@ export class SingleProductComponent implements OnInit {
 
 
   public SelectProduct(item: any) {
-    this.product.quantity_Buy = this.quantity_buy
+    this.product.Quantity_Buy = this.quantity_buy
     console.log("product", item)
 
     this.cartService.addToCart(item);

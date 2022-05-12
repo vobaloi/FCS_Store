@@ -3,19 +3,19 @@ import { DataService } from '../Services/data.service';
 import {Router} from "@angular/router"
 
 export interface SubCategory {
-  id: number
-  subCategoryName: string;
-  subCategoryDescription: string;
-  categoryId: number
+  Id: number
+  SubCategoryName: string;
+  SubCategoryDescription: string;
+  CategoryId: number
 }
 
 export interface Product {
-  id: number;
-  productName: string;
-  price: number;
-  quantity: number;
-  imageURL: string;
-  subCategoryId: number;
+  Id: number;
+  ProductName: string;
+  Price: number;
+  Quantity: number;
+  ImageURL: string;
+  SubCategoryId: number;
 }
 
 
@@ -34,10 +34,10 @@ export class HomeComponent implements OnInit {
   constructor(private DataServices: DataService , private router: Router) { }
 
   private newSubCategory : SubCategory = {
-    id: 0,
-    subCategoryName: '',
-    subCategoryDescription: '',
-    categoryId: 0,
+    Id: 0,
+    SubCategoryName: '',
+    SubCategoryDescription: '',
+    CategoryId: 0,
   }
   
   public count = 0
@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
   }
 
   public onSelectSubcategory(item: any) {
-    this.router.navigate(['/products/Sub/', item.id])
+    this.router.navigate(['/products/Sub/', item.Id])
   }
 
 
@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
 
   public onSelectProduct (item: any) {
     // console.log("item",item)
-    this.router.navigate(['/single-item/', item.id])
+    this.router.navigate(['/single-item/', item.Id])
   }
   
   public AddCart (item : any) {
