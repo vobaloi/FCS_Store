@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FCSAPI.Controllers
 {
@@ -32,7 +33,7 @@ namespace FCSAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.Include(r=>r.RoleName).ToListAsync();
+            return await _context.Users.Include(r => r.RoleName).ToListAsync();
         }
 
         // GET: api/Users/5
@@ -96,15 +97,21 @@ namespace FCSAPI.Controllers
                 user.UserName = userName;
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
-                return CreatedAtAction("GetUser", new { id = user.Id }, user);
+                //return CreatedAtAction("GetUser", new { id = user.Id }, user);
+                return Ok(new
+                {
+                    Success = true,
+                    Message = "Register Successful",
+                    Data = user
+                });
             }
             else
-                return BadRequest( new
+                return Ok(new
                 {
                     Success = false,
                     Message = "Email already exist!"
                 });
-            
+
         }
         [HttpPost]
         public async Task<ActionResult<User>> PostUser([FromBody] User user)
@@ -146,26 +153,26 @@ namespace FCSAPI.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("Login")]
-        public async Task<IActionResult> Login ([FromBody] User user)
+        public async Task<IActionResult> Login([FromBody] User user)
         {
             if (user != null && user.Email != null && user.Password != null)
             {
-                var userData = _context.Users.Include(r=> r.RoleName).Where(a => a.Email.Equals(user.Email)).FirstOrDefault();
+                var userData = _context.Users.Include(r => r.RoleName).Where(a => a.Email.Equals(user.Email)).FirstOrDefault();
 
-                if (userData != null && BCrypt.Net.BCrypt.Verify(user.Password, userData.Password ))
+                if (userData != null && BCrypt.Net.BCrypt.Verify(user.Password, userData.Password))
                 {
                     var token = GenerateToken(userData.Email, userData.Password);
-                    return Ok( new
+                    return Ok(new
                     {
                         Success = true,
                         Message = "Login successfully",
                         Data = userData,
-                        Token = token   
+                        Token = token
                     });
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         Success = false,
                         Message = "User Not found"
@@ -174,15 +181,16 @@ namespace FCSAPI.Controllers
             }
             else
             {
-                return BadRequest( new {
+                return BadRequest(new
+                {
                     Success = false,
                     Message = "Invalid Credentials"
-                });   
+                });
             }
             //var userLogin = _context.Users.Where(x => x.Email.Equals(user.Email)).FirstOrDefault();
 
             //bool isvalidPassword = BCrypt.Net.BCrypt.Verify(user.Password, userLogin.Password);
-           
+
 
             //if (isvalidPassword)
             //{
@@ -192,17 +200,17 @@ namespace FCSAPI.Controllers
 
 
         }
-        [NonAction]
-        [HttpGet]
-        public async Task<User> GetUserLogin(string email, string password)
-        {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
-        }
+        //[NonAction]
+        //[HttpGet]
+        //public  Task<User> GetUserLogin(string email)
+        //{
+        //    return _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        //}
 
 
-        private string GenerateToken (string email, string password)
+        private string GenerateToken(string email, string password)
         {
-            var userData = GetUserLogin(email,password);
+            var userData = _context.Users.FirstOrDefault(u => u.Email == email);
             var jwt = _configuration.GetSection("Jwt").Get<Jwt>();
             if (userData != null)
             {
@@ -215,7 +223,13 @@ namespace FCSAPI.Controllers
                         //new Claim("Email", user.Email),
                         //new Claim("Password", user.Password),
                         //new Claim("UserName", user.UserName),
+                        new Claim("Id",userData.Id.ToString()),
                         new Claim(ClaimTypes.Email,email),
+                        new Claim(ClaimTypes.Role,userData.RoleName.RoleName),
+                        new Claim(ClaimTypes.Name,userData.UserName),
+                        new Claim(ClaimTypes.MobilePhone,userData.Telephone),
+                        new Claim("Address",userData.Address),
+
                     };
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.key));
                 var login = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -252,6 +266,33 @@ namespace FCSAPI.Controllers
             if (lowerCase)
                 return builder.ToString().ToLower();
             return builder.ToString();
+        }
+
+        [HttpGet("UserLogin")]
+        [Authorize]
+        public async Task<IActionResult> GetUserLogin()
+        {
+            string userID = User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
+            int Id = Int32.Parse(userID);
+            var user = await _context.Users.Include(r=> r.RoleName).FirstOrDefaultAsync(c=> c.Id.Equals(Id));
+            if (user != null)
+            {
+                return Ok(new
+                {
+                    Succes = true,
+                    Data = user,
+
+                });
+            }
+            else
+            {
+                return Ok(new
+                {
+                    Success = false,
+                    Message = "User not found"
+                });
+            }
+            
         }
     }
 }

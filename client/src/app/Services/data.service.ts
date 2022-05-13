@@ -1,5 +1,6 @@
+import { MY_CONST } from 'constain';
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {Observable} from "rxjs"
 
 
@@ -36,6 +37,15 @@ export class DataService {
 
    public login (data : any) {
      return this.http.post(this.apiUrl + `/Users/Login`, data )
+   }
+
+   public register ( data : any) {
+    return this.http.post(this.apiUrl + `/Users/Register`, data )
+   }
+
+   public getUserLogin (): Observable<any> {
+     var tokenHeader = new HttpHeaders({'Authorization':'Bearer ' + localStorage.getItem(MY_CONST.LOCAL_STORAGE_NAME)})
+     return this.http.get<any>(this.apiUrl + `/Users/UserLogin`, {headers : tokenHeader})
    }
 
    //Roles

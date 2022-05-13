@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth.guard';
 import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { TableUsersComponent } from './Users/table-users/table-users.component';
@@ -14,8 +15,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
 
-  { path: 'home', component: HomeComponent },
-  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent , canActivate:[AuthGuard] },
+  { path: '', redirectTo:'/home', pathMatch:'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'cart', component: CartComponent },

@@ -24,12 +24,13 @@
                     <span class="badge badge-pill badge-danger notify">{{badge}}</span>
                 </div>
                 <div class="widget-header icontext">
-                    <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
+                    <a class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
                     <div class="text">
                         <span class="text-muted">Welcome!</span>
                         <div> 
-                            <a href="login">Sign in</a> |  
-                            <a href="register"> Register</a>
+                            <a *ngIf="!isLogin" routerLink="/login">Sign in</a> |  
+                            <a *ngIf="!isLogin" routerLink="/register"> Register</a>
+                            <a *ngIf="isLogin" (click)="LogOut()">LogOut</a>
                         </div>
                     </div>
                 </div>

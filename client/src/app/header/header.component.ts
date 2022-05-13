@@ -1,6 +1,9 @@
+import { DataService } from './../Services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../Services/cart.service';
 import { SingleProductComponent } from '../single-product/single-product.component';
+import { MY_CONST } from 'constain';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +12,26 @@ import { SingleProductComponent } from '../single-product/single-product.compone
 })
 export class HeaderComponent implements OnInit {
   public badge: number;
-  constructor( private cartService : CartService) { }
+  public isLogin : boolean = false;
+  public userDetail : any
+  constructor( private cartService : CartService, private router : Router, private dataServices: DataService) { }
 
   ngOnInit(): void {
     // let itemcarts = localStorage.getItem("cartProduct")
     // this.badge = itemcarts.length;
     // this.bage = this.single.cartNumberFunc()
     //  this.cartItem()
+    let Token = localStorage.getItem(MY_CONST.LOCAL_STORAGE_NAME)
+    if(Token) {
+      this.loadUserLogin()
+    }
     this.cartService.getProducts().subscribe((res: any) => this.badge = res.length)
+  }
+  public loadUserLogin () {
+    this.dataServices.getUserLogin().subscribe((res:any)=> {
+      this.userDetail = res
+      console.log("UserDetail", this.userDetail)
+    })
   }
 
   // public cartItem () {
@@ -26,5 +41,8 @@ export class HeaderComponent implements OnInit {
   //     this.badge = cartCount.length;
   //   }
   // }
-
+  public LogOut (){
+    localStorage.removeItem(MY_CONST.LOCAL_STORAGE_NAME)
+    this.router.navigate(['/login'])
+  }
 }

@@ -6,10 +6,10 @@
         <p-progressSpinner class="spinner" *ngIf="products.length == 0" [style]="{ width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
         <div class="col-md-3" *ngFor="let item of products">
             <div href="#" class="card card-product-grid" >
-                <a href="#" class="img-wrap"> <img src="{{item.imageURL}}"> </a>
+                <a href="#" class="img-wrap"> <img src="{{item.ImageURL}}"> </a>
                 <figcaption class="info-wrap">
-                    <a href="#" class="title">{{item.productName}}</a>
-                    <div class="price mt-1">${{item.price}}</div> <!-- price-wrap.// -->
+                    <a href="#" class="title">{{item.ProductName}}</a>
+                    <div class="price mt-1">${{item.Price}}</div> <!-- price-wrap.// -->
                     <button class="btn btn-success"> Cart </button>
                 </figcaption>       
             </div>

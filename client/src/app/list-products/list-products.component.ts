@@ -3,12 +3,12 @@ import { DataService } from '../Services/data.service';
 import {ActivatedRoute} from "@angular/router"
 
 export interface Product {
-  id: number;
-  productName: string;
-  price: number;
-  quantity: number;
-  imageURL: string;
-  subCategoryId: number;
+  Id: number;
+  ProductName: string;
+  Price: number;
+  Quantity: number;
+  ImageURL: string;
+  SubCategoryId: number;
 }
 
 @Component({
