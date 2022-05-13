@@ -1,0 +1,86 @@
+<header class="section-header">
+    <section class="header-main border-bottom">
+        <div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-2 col-4 text-primary">
+            <h1>FCS Store</h1>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <form action="#" class="search">
+                <div class="input-group w-100">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="submit">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                </div>
+            </form> <!-- search-wrap .end// -->
+        </div> <!-- col.// -->
+        <div class="col-lg-4 col-sm-6 col-12">
+            <div class="widgets-wrap float-md-end">
+                <div class="widget-header  me-3">
+                    <a routerLink="cart" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
+                    <span class="badge badge-pill badge-danger notify">{{badge}}</span>
+                </div>
+                <div class="widget-header icontext">
+                    <a class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
+                    <div class="text">
+                        <span class="text-muted">Welcome!</span>
+                        <div *ngIf="!isLogin"> 
+                            <a  routerLink="/login">Sign in</a> |  
+                            <a  routerLink="/register"> Register</a>
+                        </div>
+                        <div *ngIf="isLogin"> 
+                          <strong *ngIf="userDetail" >{{userDetail.UserName}}</strong> |  
+                          <a class="pointer-event" (click)="LogOut()"> LogOut</a>
+                      </div>
+                    </div>
+                </div>
+    
+            </div> <!-- widgets-wrap.// -->
+        </div> <!-- col.// -->
+    </div> <!-- row.// -->
+        </div> <!-- container.// -->
+    </section> <!-- header-main .// -->
+    
+    
+    
+    <nav class="navbar navbar-main navbar-expand-lg navbar-light border-bottom">
+      <div class="container">
+    
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+               <a class="nav-link" routerLink="/fcs/home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" >About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" >ChatBot</a>
+            </li>
+            <li *ngIf="userDetail && userDetail.RoleName.RoleName !='Customer'" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                More
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" routerLink="/fcs/table-products">Products Management</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" routerLink="/fcs/users">Users Management</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" routerLink="/fcs/categories">Categories Management</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" routerLink="/fcs/subcategories">SubCategories Management</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div> <!-- collapse .// -->
+      </div> <!-- container .// -->
+    </nav>
+    
+    </header> <!-- section-header.// -->
