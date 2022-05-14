@@ -1,7 +1,8 @@
 <section class="py-5">
     <div class="container px-4">
         <h2>Table Sub Categories</h2>
-        <p-button (click)="showModalDialog()" icon="pi pi-plus-circle" label="Add New"></p-button>
+        <p-button (click)="showModalDialog()" icon="pi pi-plus-circle" class="mr-2" label="Add New"></p-button>
+        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
       <div class="row"> 
         <table 
         mat-table   

@@ -88,8 +88,6 @@ export class TableUsersComponent implements OnInit {
       console.log("user",data)
     })
   }
-  
-
   public SaveUser () :void {
     if ( this.user.Id !== 0) {
     console.log("update")
