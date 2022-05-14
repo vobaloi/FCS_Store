@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 
 // import custom validator  class
-import { CustomValidators } from '../../providers/CustomValidators';
-import { DataService } from '../../Services/data.service';
+import { CustomValidators } from '../providers/CustomValidators';
+import { DataService } from '../Services/data.service';
 
 @Component({
   selector: 'app-register',

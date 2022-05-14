@@ -1,6 +1,6 @@
-import { CartService } from '../../../../Services/cart.service';
+import { CartService } from './../Services/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../../Services/data.service';
+import { DataService } from '../Services/data.service';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router"
 
 
