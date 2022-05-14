@@ -5,12 +5,12 @@
     <div class="row">
         <p-progressSpinner class="spinner" *ngIf="products.length == 0" [style]="{ width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
         <div class="col-md-3" *ngFor="let item of products">
-            <div href="#" class="card card-product-grid" >
-                <a href="#" class="img-wrap"> <img src="{{item.ImageURL}}"> </a>
+            <div (click)="onSelectProduct(item)" class="card card-product-grid" >
+                <a  class="img-wrap"> <img src="{{item.ImageURL}}"> </a>
                 <figcaption class="info-wrap">
-                    <a href="#" class="title">{{item.ProductName}}</a>
+                    <a  class="title">{{item.ProductName}}</a>
                     <div class="price mt-1">${{item.Price}}</div> <!-- price-wrap.// -->
-                    <button class="btn btn-success"> Cart </button>
+                    <button class="btn btn-success"> View Details </button>
                 </figcaption>       
             </div>
         </div> <!-- col.// -->

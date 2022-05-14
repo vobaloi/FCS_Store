@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
   }
 
   public onSelectSubcategory(item: any) {
-    this.router.navigate(['/products/Sub/', item.Id])
+    this.router.navigate(['/fcs/products/Sub/', item.Id])
   }
 
 
@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
 
   public onSelectProduct (item: any) {
     // console.log("item",item)
-    this.router.navigate(['/single-item/', item.Id])
+    this.router.navigate(['/fcs/single-item/', item.Id])
   }
   
   public AddCart (item : any) {

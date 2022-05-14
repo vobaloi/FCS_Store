@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../Services/data.service';
-import {ActivatedRoute} from "@angular/router"
+import {ActivatedRoute, Router} from "@angular/router"
 
 export interface Product {
   Id: number;
@@ -22,7 +22,7 @@ export class ListProductsComponent implements OnInit {
 
   public idSub : number = 1
 
-  constructor(private DataServices: DataService, private route: ActivatedRoute ) { }
+  constructor(private DataServices: DataService, private route: ActivatedRoute, private router: Router ) { }
 
   ngOnInit(): void {
     let id = parseInt(this.route.snapshot.params['id'])
@@ -35,6 +35,10 @@ export class ListProductsComponent implements OnInit {
       this.products = data as Product[]
       console.log("products: ",data)
     })
+  }
+  public onSelectProduct (item: any) {
+    // console.log("item",item)
+    this.router.navigate(['/fcs/single-item/', item.Id])
   }
 
 }
