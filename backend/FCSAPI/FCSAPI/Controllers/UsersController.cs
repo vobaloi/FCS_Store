@@ -117,16 +117,26 @@ namespace FCSAPI.Controllers
         public async Task<ActionResult<User>> PostUser([FromBody] User user)
         {
             var newuser = _context.Users.Where(x => x.Email.Equals(user.Email)).FirstOrDefault();
+            var checkTel = _context.Users.Where(x => x.Telephone.Equals(user.Telephone)).FirstOrDefault();
             if (newuser == null)
-            {
-                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                _context.Users.Add(user);
-                await _context.SaveChangesAsync();
+                { 
+                if (checkTel == null)
+                {
+                    user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                    _context.Users.Add(user);
+                    await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetUser", new { id = user.Id }, user);
+                    return CreatedAtAction("GetUser", new { id = user.Id }, user);
+                } else {
+                    return Ok(new
+                    {
+                        Success = false,
+                        Message = "Telephone is used"
+                    });
+                } 
             }
             else
-                return BadRequest(new
+                return Ok(new
                 {
                     Success = false,
                     Message = "Email already exist!"
