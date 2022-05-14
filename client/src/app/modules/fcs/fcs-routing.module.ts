@@ -1,3 +1,4 @@
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 import { HomeComponent } from './components/home/home.component';
 import { FcsContainComponent } from './components/fcs-contain/fcs-contain.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'products/Sub/:id', component: ListProductsComponent },
     { path: 'cart', component: CartComponent },
     { path: 'single-item/:id', component: SingleProductComponent },
+    { path: 'checkout', component: CheckoutComponent },
   ]}
 ];
 

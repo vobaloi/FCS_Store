@@ -43,10 +43,13 @@
                      </div>
                  </div>
                 </td>
-                <td class="align-middle"><a href="#" class="text-dark"><i class="pi pi-trash"></i></a>
+                <td class="align-middle"><a (click)="removeItem(item)" class="text-dark"><i class="pi pi-trash"></i></a>
                 </td>
             </tr>
           </tbody>
+          <div class="btn-remove">
+            <button class="btn btn-danger" (click)="emptyCart()" > Remove all</button>
+          </div>
         </table>
       </div>
       <!-- End -->
@@ -76,12 +79,12 @@
         <p class="mb-4"><em>Shipping and additional costs are calculated based on values you have entered.</em></p>
         <ul class="list-unstyled mb-4">
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>${{totalPrice}}</strong></li>
-          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>
+          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$0.00</strong></li>
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-            <h5 class="fw-bold">$400.00</h5>
+            <h4 class="fw-bold">${{totalPrice}}</h4>
           </li>
-        </ul><a href="#" class="btn btn-dark rounded-pill py-2 d-md-block">Procceed to checkout</a>
+        </ul><a class="btn btn-dark rounded-pill py-2 d-md-block btn-checkout btn-checkout" (click)="Checkout()"> Checkout</a>
       </div>
     </div>
   </div>

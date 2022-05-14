@@ -62,4 +62,15 @@
 .btnCart {
     text-align: -webkit-center;
 }
+.btn-remove {
+    position: absolute;
+    right: 45px;
+    margin-top: 5px;
+}
+.btn-checkout {
+    color: aliceblue;
+}
+.btn-checkout:hover {
+    color: aqua;
+}
 

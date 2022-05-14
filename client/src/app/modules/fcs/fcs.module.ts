@@ -32,6 +32,7 @@ import { TableProductsComponent } from './components/table-products/table-produc
 import { ListProductsComponent } from './components/list-products/list-products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { SingleProductComponent } from './components/single-product/single-product.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 
@@ -49,6 +50,7 @@ import { SingleProductComponent } from './components/single-product/single-produ
     ListProductsComponent,
     CartComponent,
     SingleProductComponent,
+    CheckoutComponent,
   ],
   imports: [
     CommonModule,

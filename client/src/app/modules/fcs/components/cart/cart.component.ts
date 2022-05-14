@@ -1,6 +1,8 @@
+import { DataService } from './../../../../Services/data.service';
 import { CartService } from '../../../../Services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -10,12 +12,12 @@ import { MessageService } from 'primeng/api';
 })
 export class CartComponent implements OnInit {
 
-  
+  public userDetail: any
   public products : any = []
   public totalPrice : number = 0 
   public productPrices : any = []
 
-  constructor(private messageService: MessageService, private cartService : CartService) { }
+  constructor(private messageService: MessageService, private cartService : CartService, private dataServices : DataService, private router: Router) { }
 
   ngOnInit(): void {
     this.cartService.getProducts().subscribe((res: any) => {
@@ -24,6 +26,10 @@ export class CartComponent implements OnInit {
     })
     this.loadCart()
     console.log(this.products)
+
+    this.dataServices.getUserLogin().subscribe((res:any)=> {
+      this.userDetail = res.Data
+    })
   }
   public dec (item : any) {
     for (let i =0; i<this.products.length; i++ ) {
@@ -55,6 +61,26 @@ export class CartComponent implements OnInit {
       this.totalPrice = this.products.reduce(function(acc : any, val : any){
         return acc + (val.Price * val.Quantity_Buy)
       }, 0)
+    }
+  }
+
+  public removeItem (item: any) {
+    this.cartService.removeCartItem(item)
+    this.loadCart()
+  }
+
+  public emptyCart () {
+    this.cartService.removeAllItem()
+    this.loadCart();
+  }
+  public Checkout() {
+    if(this.userDetail) {
+      this.router.navigate(["/fcs/checkout"])
+    }else {
+      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'You need login to checkout'});
+      setTimeout(() => {
+        this.router.navigate(["login"])
+      }, 3000)
     }
   }
 }
