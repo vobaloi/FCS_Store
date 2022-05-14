@@ -31,32 +31,29 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { HomeComponent } from './modules/fcs/components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { TableProductsComponent } from './Products/table-products/table-products.component';
+// import { TableProductsComponent } from './modules/fcs/components/table-products/table-products.component';
 // import { HeaderComponent } from './modules/fcs/components/header/header.component';
 // import { FooterComponent } from './modules/fcs/components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { CartComponent } from './cart/cart.component';
-import { SingleProductComponent } from './single-product/single-product.component';
-import { ListProductsComponent } from './list-products/list-products.component';
-import { TableUsersComponent } from './Users/table-users/table-users.component';
-import { CategoriesComponent } from './categories/categories.component';
-import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
+// import { CartComponent } from './modules/fcs/components/cart/cart.component';
+// import { SingleProductComponent } from './single-product/single-product.component';
+// import { ListProductsComponent } from './modules/fcs/components/list-products/list-products.component';
+// import { TableUsersComponent } from './modules/fcs/components/table-users/table-users.component';
+// import { CategoriesComponent } from './modules/fcs/components/categories/categories.component';
+// import { SubCategoriesComponent } from './modules/fcs/components/sub-categories/sub-categories.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    
     LoginComponent,
     RegisterComponent,
-    TableProductsComponent,
    
     PageNotFoundComponent,
-    CartComponent,
-    SingleProductComponent,
-    ListProductsComponent,
-    TableUsersComponent,
-    CategoriesComponent,
-    SubCategoriesComponent,
+   
+    
+   
+    
+   
 
   ],
   imports: [

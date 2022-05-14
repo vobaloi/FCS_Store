@@ -25,6 +25,15 @@ import { MessageModule } from 'primeng/message';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RouterModule } from '@angular/router';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { SubCategoriesComponent } from './components/sub-categories/sub-categories.component';
+import { TableUsersComponent } from './components/table-users/table-users.component';
+import { TableProductsComponent } from './components/table-products/table-products.component';
+import { ListProductsComponent } from './components/list-products/list-products.component';
+import { CartComponent } from './components/cart/cart.component';
+import { SingleProductComponent } from './components/single-product/single-product.component';
+
+
 
 
 @NgModule({
@@ -32,7 +41,14 @@ import { RouterModule } from '@angular/router';
     FcsContainComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CategoriesComponent,
+    SubCategoriesComponent,
+    TableUsersComponent,
+    TableProductsComponent,
+    ListProductsComponent,
+    CartComponent,
+    SingleProductComponent,
   ],
   imports: [
     CommonModule,
