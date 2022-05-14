@@ -5,7 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {path: '', component: FcsContainComponent, children: [
-    {path: 'home', component: HomeComponent}
+    {path: 'home', component: HomeComponent},
+    
   ]}
 ];
 
