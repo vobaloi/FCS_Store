@@ -37,9 +37,8 @@ export class CartService {
 
   public removeCartItem (product : any) {
     this.cartItemList.map((a : any, index : any) =>{
-      if (product.Id === a.Id) {
+      if (product.id === a.id) {
         this.cartItemList.splice(index,1)
-        this.productList.next(this.cartItemList)
       }
     } )
   }

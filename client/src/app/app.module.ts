@@ -21,20 +21,44 @@ import {PasswordModule} from 'primeng/password';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
+
+
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { TableProductsComponent } from './Products/table-products/table-products.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CartComponent } from './cart/cart.component';
+import { SingleProductComponent } from './single-product/single-product.component';
+import { ListProductsComponent } from './list-products/list-products.component';
+import { TableUsersComponent } from './Users/table-users/table-users.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     LoginComponent,
     RegisterComponent,
+    TableProductsComponent,
+    HeaderComponent,
+    FooterComponent,
     PageNotFoundComponent,
+    CartComponent,
+    SingleProductComponent,
+    ListProductsComponent,
+    TableUsersComponent,
+    CategoriesComponent,
+    SubCategoriesComponent,
+
   ],
   imports: [
     BrowserModule,
