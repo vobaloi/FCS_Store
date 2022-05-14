@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../auth/auth.guard';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 
 import { HomeComponent } from './components/home/home.component';
@@ -16,14 +17,14 @@ const routes: Routes = [
   {path: '', component: FcsContainComponent, children: [
     {path: '', redirectTo:'/fcs/home', pathMatch:'full'},
     {path: 'home', component: HomeComponent},
-    {path: 'categories', component: CategoriesComponent},
-    { path: 'subcategories', component: SubCategoriesComponent },
-    { path: 'users', component: TableUsersComponent },
-    { path: 'table-products', component: TableProductsComponent },
+    {path: 'categories', component: CategoriesComponent, canActivate:[AuthGuard]},
+    { path: 'subcategories', component: SubCategoriesComponent , canActivate:[AuthGuard] },
+    { path: 'users', component: TableUsersComponent , canActivate:[AuthGuard]},
+    { path: 'table-products', component: TableProductsComponent , canActivate:[AuthGuard] },
     { path: 'products/Sub/:id', component: ListProductsComponent },
     { path: 'cart', component: CartComponent },
     { path: 'single-item/:id', component: SingleProductComponent },
-    { path: 'checkout', component: CheckoutComponent },
+    { path: 'checkout', component: CheckoutComponent , canActivate:[AuthGuard] },
   ]}
 ];
 
