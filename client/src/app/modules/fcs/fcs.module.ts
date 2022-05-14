@@ -1,7 +1,7 @@
 
 
 import { HomeComponent } from './components/home/home.component';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA,NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FcsContainComponent } from './components/fcs-contain/fcs-contain.component';
 
@@ -37,6 +37,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 
+
 @NgModule({
   declarations: [
     FcsContainComponent,
@@ -51,6 +52,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CartComponent,
     SingleProductComponent,
     CheckoutComponent,
+
   ],
   imports: [
     CommonModule,
@@ -73,6 +75,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     InputNumberModule,
     FileUploadModule,
     RouterModule,
-  ]
+  ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FcsModule { }
