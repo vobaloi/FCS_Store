@@ -23,15 +23,13 @@ export class HeaderComponent implements OnInit {
     //  this.cartItem()
     let Token = localStorage.getItem(MY_CONST.LOCAL_STORAGE_NAME)
     if(Token) {
-      this.loadUserLogin()
+      
     }
-    this.cartService.getProducts().subscribe((res: any) => this.badge = res.length)
-  }
-  public loadUserLogin () {
     this.dataServices.getUserLogin().subscribe((res:any)=> {
-      this.userDetail = res
+      this.userDetail = res.Data
       console.log("UserDetail", this.userDetail)
     })
+    this.cartService.getProducts().subscribe((res: any) => this.badge = res.length)
   }
 
   // public cartItem () {

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   
   ngOnInit(): void {
     if (localStorage.getItem(MY_CONST.LOCAL_STORAGE_NAME)!= null) {
-      this.router.navigateByUrl('/home')
+      this.router.navigateByUrl('/fcs/home')
     }
   }
   
