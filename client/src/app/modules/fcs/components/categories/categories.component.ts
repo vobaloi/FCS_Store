@@ -1,127 +1,95 @@
-import { DataService } from './../../Services/data.service';
+import { DataService } from '../../../../Services/data.service';
 import { OnInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-
 
 import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
 
 
 
-export interface User {
-  Id: number 
-  Email: string;
-  Password: string
-  UserName: string;
-  Address: string;
-  RoleId: number;
-  Telephone: string
-}
-export interface Role {
+export interface Category {
   Id: number
-  RoleName: string;
+  CategoryName: string;
+  CategoryDescription: string;
 }
-
-
 
 @Component({
-  selector: 'app-table-users',
-  templateUrl: './table-users.component.html',
-  styleUrls: ['./table-users.component.scss'],
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.scss'],
   providers: [ConfirmationService,MessageService]
 })
-export class TableUsersComponent implements OnInit {
+export class CategoriesComponent implements OnInit {
   @ViewChild(MatPaginator , {static: true}) paginator: MatPaginator ;
 
   displayModal: boolean = false;
 
-  public roles: Role[] = []
-  public ELEMENT_DATA: User[] = []
+  public cate: Category[] = []
+  public ELEMENT_DATA: Category[] = []
 
-  displayedColumns: string[] = ['email', 'username', 'address', 'roleName', 'action'];
-  dataSource = new MatTableDataSource<User>(this.ELEMENT_DATA);
+  displayedColumns: string[] = ['categoryName', 'categoryDescription', 'action'];
+  dataSource = new MatTableDataSource<Category>(this.ELEMENT_DATA);
 
-  public selectedRole: any = {
-    id:0, roleName: ""
-  }
 
-  private newUser : User = {
+  private newCate : Category ={
     Id: 0,
-    Email: '',
-    UserName: '',
-    Password: '',
-    Address: '',
-    RoleId:0,
-    Telephone:''
+    CategoryName:'',
+    CategoryDescription:'',
   }
 
-  private newRole : Role ={
-    Id: 0,
-    RoleName:''
-  }
-
-  public user: User = Object.assign({}, this.newUser)
-  public role: Role = Object.assign({}, this.newRole)
-
- 
-
-
-
+  public category: Category = Object.assign({}, this.newCate)
 
   constructor(private DataServices: DataService , private confirmationService: ConfirmationService, private messageService: MessageService) {
 
    }
 
   ngOnInit() {
-    this.loadUser()
-    this.DataServices.getRoleList().subscribe((data) => {
-       this.roles = data;
-       console.log("roles: ",this.roles)
-       
-    })
+    this.loadCategory()
     this.dataSource.paginator = this.paginator;
   }
 
-  public loadUser () {
-    this.DataServices.getUserList().subscribe((data) => {
-      this.dataSource.data = data as User[]
-      console.log("user",data)
+  public loadCategory () {
+    this.DataServices.getCategoryList().subscribe((data) => {
+      this.dataSource.data = data as Category[]
+      console.log("category: ",data)
     })
   }
   
 
-  public SaveUser () :void {
-    if ( this.user.Id !== 0) {
+  public saveCategory () :void {
+    if ( this.category.Id !== 0) {
     console.log("update")
-    this.DataServices.updateUser(this.user.Id, this.user).subscribe((data)=> {
+    this.DataServices.updateCategory(this.category.Id, this.category).subscribe((data)=> {
       console.log('return-data update: ',data)
-      this.loadUser()
+      this.messageService.add({severity:'info', summary:'Notification', detail:'You have updated'});
+      this.loadCategory()
       })
     this.ResetForm()
     }
     else {
       console.log("add")
-      this.DataServices.addUser(this.user).subscribe((data)=> {
+      this.DataServices.addCategory(this.category).subscribe((data)=> {
       console.log('return-data add new: ',data)
-      this.loadUser()
+      this.loadCategory()
     })
     this.ResetForm()
     }
   }
 
-  public ChangeRole(event: any) : void {
-    this.user.RoleId= parseInt(event.value) 
-  }
+  // public ChangeRole(event: any) : void {
+  //   this.category.roleId= parseInt(event.value) 
+  // }
 
 
-  public showUpdateForm ( id: number, user : User) : void {
-    this.user = user
+  public showUpdateForm ( id: number, category : Category) : void {
+    this.category = category
+    console.log("cate", category)
     this.showModalDialog()
   }
 
-  public deleteUser (id: number): void {
-    this.DataServices.deleteUser(id).subscribe((data)=> {
-      this.loadUser()
+  public deleteCategory (id: number): void {
+    this.DataServices.deleteCategory(id).subscribe((data)=> {
+      this.loadCategory()
     })
     
   }
@@ -130,14 +98,13 @@ export class TableUsersComponent implements OnInit {
     this.displayModal = true;
   
 }
-
   confirmDelete(id: number, username: string) {
     this.confirmationService.confirm({
         message: 'Are you sure that you want to delete ' + username +'?',
         header: 'Warning',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-            this.deleteUser(id);
+            this.deleteCategory(id);
             this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have accepted'});
         },
         reject: (type: any) => {
@@ -154,9 +121,9 @@ export class TableUsersComponent implements OnInit {
 }
 
   public ResetForm () {
-  this.user = this.newUser
+  this.category = this.newCate
   this.displayModal= false
   }
 
-}
 
+}

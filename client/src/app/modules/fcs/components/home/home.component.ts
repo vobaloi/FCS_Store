@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../Services/data.service';
+import { DataService } from '../../../../Services/data.service';
 import {Router} from "@angular/router"
 
 export interface SubCategory {

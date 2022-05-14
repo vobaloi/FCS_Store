@@ -1,6 +1,6 @@
-import { DataService } from './../Services/data.service';
+import { DataService } from '../../../../Services/data.service';
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../Services/cart.service';
+import { CartService } from '../../../../Services/cart.service';
 import { SingleProductComponent } from '../single-product/single-product.component';
 import { MY_CONST } from 'constain';
 import { Router } from '@angular/router';
