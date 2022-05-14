@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         console.log("after_login",res)
         if(res.Success) {
           localStorage.setItem(MY_CONST.LOCAL_STORAGE_NAME, res.Token)
-          this.router.navigateByUrl('home')
+          this.router.navigateByUrl('/fcs/home')
         }else {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Incorrect Email or Password'});
         }

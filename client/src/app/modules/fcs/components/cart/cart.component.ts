@@ -22,8 +22,7 @@ export class CartComponent implements OnInit {
       this.products = res;
       console.log(this.products)
     })
-
-    
+    this.loadCart()
     console.log(this.products)
   }
   public dec (item : any) {
@@ -34,11 +33,9 @@ export class CartComponent implements OnInit {
           this.products[i].Quantity_Buy= 1
           this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Quantity must be than to 0'});
         }
-        else {
-          console.log("subPrice", item.price * this.products[i].quantity_Buy) 
-        }
       }
     }
+    this.loadCart()
   }
   public inc (item : any) {
     for (let i =0; i<this.products.length; i++ ) {
@@ -48,12 +45,16 @@ export class CartComponent implements OnInit {
           this.products[i].Quantity_Buy = this.products[i].Quantity
           this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Quantity must be less than the quantity of Store'});
         }
-        else {
-         
-          let abc = item.Price * this.products[i].Quantity_Buy
-          console.log("sub",abc) 
-        }
       }
+    }
+    this.loadCart()
+  }
+
+  public loadCart () {
+    if(this.products) {
+      this.totalPrice = this.products.reduce(function(acc : any, val : any){
+        return acc + (val.Price * val.Quantity_Buy)
+      }, 0)
     }
   }
 }

@@ -22,6 +22,7 @@ export interface Product {
 export class SingleProductComponent implements OnInit {
   public quantity_buy: number = 1;
 
+  public products: any
   public param : any
   public productGet : any
   public productId: number = 0
@@ -56,6 +57,10 @@ export class SingleProductComponent implements OnInit {
       this.loadRelateProduct()
       this.quantity_buy = 1
     })
+     this.cartService.getProducts().subscribe((res: any)=>{
+       this.products = res
+     })
+ 
   }
 
   public loadProduct() {
@@ -74,7 +79,7 @@ export class SingleProductComponent implements OnInit {
 
   public onSelectProduct (item: any) {
     // console.log("item",item)
-    this.router.navigate(['/single-item/', item.Id])
+    this.router.navigate(['/fcs/single-item/', item.Id])
 
   }
 
@@ -132,7 +137,21 @@ export class SingleProductComponent implements OnInit {
   public SelectProduct(item: any) {
     this.product.Quantity_Buy = this.quantity_buy
     console.log("product", item)
-
-    this.cartService.addToCart(item);
+    let cartDataNull = this.products
+    if(cartDataNull == null) {
+      this.cartService.addToCart(item)
+    } else {
+      let index: number = -1;
+      for(let i = 0 ;  i < this.products.length; i++) {
+        if (item.Id === this.products[i].Id) {
+          this.products[i].Quantity_Buy = this.quantity_buy
+          index = i;
+          break;
+        }
+      }
+      if (index == -1) {
+        this.cartService.addToCart(item)
+    }
+  }
   }
 }

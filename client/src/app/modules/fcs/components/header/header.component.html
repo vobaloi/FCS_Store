@@ -28,12 +28,12 @@
                     <div class="text">
                         <span class="text-muted">Welcome!</span>
                         <div *ngIf="!userDetail"> 
-                            <a routerLink="'/login">Sign in</a> |  
-                            <a  routerLink="/register"> Register</a>
+                            <a routerLink="/login"> Sign in</a> |  
+                            <a routerLink="/register"> Register</a>
                             
                         </div>
-                        <div >
-                          <strong *ngIf="userDetail" >{{userDetail.UserName}}</strong>| 
+                        <div *ngIf="userDetail" >
+                          <strong  >{{userDetail.UserName}}</strong>| 
                           <a (click)="LogOut()">LogOut</a>
                         </div>
                     </div>
