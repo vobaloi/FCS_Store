@@ -1,0 +1,131 @@
+<section class="py-5">
+  <div class="container px-4 px-lg-5">
+    <h2>Table Products</h2>
+    <p-button (click)="showModalDialog()" icon="pi pi-plus-circle" label="Add New"></p-button>
+    <div class="row">
+      <table 
+      mat-table   
+      [dataSource]="dataSource" 
+      class="mat-elevation-z8 mt-1">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef >Product Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.ProductName}} </td>
+        </ng-container>
+      
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Price </th>
+          <td mat-cell *matCellDef="let element"> {{element.Price}} </td>
+        </ng-container>
+
+        <!-- Quantity Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantity </th>
+          <td mat-cell *matCellDef="let element"> {{element.Quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="subCategory">
+          <th mat-header-cell *matHeaderCellDef> Sub Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.SubCategory.SubCategoryName}} </td>
+        </ng-container>
+      
+        <!-- Image Column -->
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef> Image </th>
+          <td mat-cell *matCellDef="let element"> 
+              <div class="p-2 ">
+                <img width="60" src="{{element.ImageURL}}">
+              </div>
+          </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element"> 
+            <button class="border-0 bg-white m-lg-1" (click)="showUpdateForm(element.Id, element)"><mat-icon>edit</mat-icon></button>
+            <button class="border-0 bg-white" (click)="confirmDelete(element.Id, element.ProductName)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+      </table>
+    </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons 
+        aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+</section>
+
+<p-dialog header="Product details" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+  [draggable]="false" [resizable]="false">
+  <p-divider></p-divider>
+  <div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <p>Fill in the data below</p>
+                    <form class="requires-validation" novalidate>
+                        <div class="col-md-12">
+                            <input class="form-control" type="text" name="productName" placeholder="Product Name" [(ngModel)] = "product.ProductName" required>
+                             <div class="valid-feedback">Email field is valid!</div>
+                             <div class="invalid-feedback">Email field cannot be blank!</div>
+                        </div>
+                        <div class="col-md-12">
+                          <p class="mt-2 mb-0">Price</p>
+                          <input class="form-control" type="number" name="price" placeholder="Product Price" [(ngModel)] = "product.Price" required>
+                           <div class="valid-feedback">Email field is valid!</div>
+                           <div class="invalid-feedback">Email field cannot be blank!</div>
+                      </div>
+                      <div class="col-md-12">
+                        <p class="mt-2 mb-0">Quantity</p>
+                        <input class="form-control" type="number" name="quantity" placeholder="Product Quantity" [(ngModel)] = "product.Quantity" required>
+                         <div class="valid-feedback">Email field is valid!</div>
+                         <div class="invalid-feedback">Email field cannot be blank!</div>
+                    </div>
+                       <div class="col-md-12">
+                        <select class="form-select mt-3" name="subcategory" (change)= "ChangeSubCategory($event.target)"  [(ngModel)] = "product.SubCategoryId" required>
+                              <option selected disabled value="0">Sub Category</option>
+                              <option  *ngFor="let cate of subCategories" [value]="cate.Id">{{cate.SubCategoryName}}</option>
+                       </select>
+                        <div class="valid-feedback">You selected a position!</div>
+                        <div class="invalid-feedback">Please select a position!</div>
+                   </div>
+                   <div class="col-md-12 image">
+                     <p class="mb-0 mt-2">Image</p>
+                    <input class="" type="file" name="file" value="Upload" accept="image/*" (change)="ChangeImage($event)"/>
+                    <img width="60" src="{{product.ImageURL}}">
+               </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+      <ng-template pTemplate="footer">
+        <p-divider></p-divider>
+        <button pButton pRipple (click)="saveProduct()" type="button" label="Submit" class="p-button-success"></button>
+        <button pButton pRipple (click)="ResetForm()"  type="button" label="Cancel" class="p-button-danger"></button>
+      </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+<p-toast></p-toast>
+
+
+

@@ -1,0 +1,77 @@
+<p-toast></p-toast>
+<div class=" align-items-center py-4 bg-gray-100 vh-10">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- register -->
+         <div class="col-lg-6 px-lg-4">
+          <div class="card">
+            <div class="card-header px-lg-5">
+              <div class="card-heading text-primary"><h3>FCS Register</h3></div>
+            </div>
+            <div class="card-body p-lg-5">
+              <h3 class="mb-0"></h3>
+              <p class="text-muted text-sm mb-1">Register an account by Email & Password</p>
+              <form [formGroup]="form" (ngSubmit)="onSubmit()" action="index.html">
+                <div class="form-floating mb-3">
+                  
+                  <input class="form-control" id="floatingInput" formControlName="email" type="email" placeholder="name@example.com" [ngClass]="{ 'is-invalid': submit && f.email.errors }" >
+                  <label for="floatingInput">Email address</label>
+                  <div *ngIf="submit && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+                <div class="form-floating mb-3 password-div ">
+                  <input class="form-control" id="password"  [type]="showPassword ? 'text' : 'password'" formControlName="password" type="password" [(ngModel)]="password" placeholder="Password" [ngClass]="{ 'is-invalid': submit && f.password.errors }">
+                  <label for="floatingPassword">Password</label>
+                  <div class = "eye-b">
+                    <i alt="show" style="font-size: 1.5rem" class="pi pi-eye "
+                       (click)="showPassword = !showPassword"
+                       [class.hide]="showPassword"></i>
+                    <i alt="hide" style="font-size: 1.5rem" class="pi pi-eye-slash"
+                       (click)="showPassword = !showPassword"
+                       [class.hide]="!showPassword"></i>
+                  </div>
+                  <div *ngIf="submit && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <!-- <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div> -->
+                    <div *ngIf="f.password.errors.pattern">
+                      <p class="mt-2">Suggestions</p>
+                      <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                          <li>At least one lowercase</li>
+                          <li>At least one uppercase</li>
+                          <li>At least one numeric</li>
+                          <li>Minimum 8 characters</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-floating mb-3">
+                  <input class="form-control" id="confirm_password" formControlName="confirm_password" type="password" [(ngModel)]="cf_password" placeholder="Confirm Password" [ngClass]="{ 'is-invalid': submit && f.confirm_password.errors }">
+                  <label for="confirm_password">Confirm Password</label>
+                  <div *ngIf="submit && f.confirm_password.errors" class="invalid-feedback">
+                    <div *ngIf="f.confirm_password.errors.required">Confirm Password is required</div>
+                    <div *ngIf="f.confirm_password.validator">Password and confirm not match</div>
+                  </div>
+                </div>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" name="agree" id="agree">
+                  <label class="form-check-label" for="agree">I agree with the <a href="#">Terms & Conditions</a>.</label>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary"  id="register" type="submit" name="registerSubmit">Register</button>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer px-lg-5 py-lg-4">
+              <div class="text-sm text-muted">Already have an account? <a routerLink="/login" >Login</a>.</div>
+            </div>
+          </div>
+        </div>
+       <div class="col-lg-6 col-xl-5 ms-xl-auto px-lg-4 text-center text-primary"><img class="img-fluid mb-4" width="300" src="https://img.freepik.com/free-vector/smart-phone-store-logo-vector_8169-118.jpg" alt="" style="transform: rotate(5deg)">
+        <h1 class="mb-4">FPT Cellphone Store <br class="d-none d-lg-inline">nice to meet you</h1>
+        <h3 class="lead text-muted">We will provide you with the best service</h3>
+        </div>
+      </div>
+    </div>
+</div>
